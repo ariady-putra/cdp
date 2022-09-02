@@ -134,3 +134,29 @@ app.get('/retrieveMetadata', function(req, rsp)
         });
 });
 
+app.get('/transfer', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/transfer.sh '
+        + req.query.walletNameSrc + ' '
+        + req.query.walletNameDst + ' '
+        + req.query.lovelaces,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send('<pre>'
+                    + stdout.toString()
+                    + '</pre>');
+            }
+            else
+            {
+                console.log('submitTransfer error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+

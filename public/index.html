@@ -69,5 +69,34 @@
                 value = "Retrieve METADATA"
             />
         </form>
+        <hr/>
+        <form action="/transfer" method="GET">
+            <input
+                type        = "text"
+                placeholder = "Enter src wallet name"
+                id          = "walletNameSrc"
+                name        = "walletNameSrc"
+                required
+            />
+            <input
+                type        = "text"
+                placeholder = "Enter dst wallet name"
+                id          = "walletNameDst"
+                name        = "walletNameDst"
+                required
+            />
+            <input
+                type        = "number"
+                placeholder = "Lovelaces"
+                id          = "lovelaces"
+                name        = "lovelaces"
+                min         = "1000000"
+                required
+            />
+            <input
+                type  = "submit"
+                value = "Send Tx"
+            />
+        </form>
     </body>
 </html>
