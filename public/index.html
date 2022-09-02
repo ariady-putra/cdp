@@ -14,6 +14,7 @@
                 value = "Create Wallet"
             />
         </form>
+        <hr/>
         <form action="/cekbalance" method="GET">
             <input
                 type        = "text"
@@ -27,6 +28,46 @@
                 value = "Cek Balance"
             />
         </form>
+        <hr/>
+        <form action="/submitMetadata" method="GET">
+            <input
+                type        = "text"
+                placeholder = "Enter wallet name"
+                id          = "walletName"
+                name        = "walletName"
+                required
+            />
+            <input
+                type  = "submit"
+                value = "Submit METADATA"
+            /><br/>
+            <textarea
+                id          = "metadataJson"
+                name        = "metadataJson"
+                rows        = "6"
+                cols        = "60"
+                required>
+{
+    "81672943": {
+        "name": "hello world",
+        "completed": 0
+    }
+}
+            </textarea>
+        </form>
+        <hr/>
+        <form action="/retrieveMetadata" method="GET">
+            <input
+                type        = "text"
+                placeholder = "Enter METADATA key"
+                id          = "metadataKey"
+                name        = "metadataKey"
+                required
+            />
+            <input
+                type  = "submit"
+                value = "Retrieve METADATA"
+            />
+        </form>
     </body>
 </html>
-
