@@ -14,7 +14,7 @@ app.get('/', function(req, rsp)
     rsp.sendFile('public/index.html');
 });
 
-app.get('/querytip', function(req, rsp)
+app.get('/queryTip', function(req, rsp)
 {
     const { exec } = require('child_process');
     exec('sh sh/tipct.sh ',
@@ -37,11 +37,11 @@ app.get('/querytip', function(req, rsp)
         });
 });
 
-app.get('/createwallet', function(req, rsp)
+app.get('/createWallet', function(req, rsp)
 {
     const { exec } = require('child_process');
-    exec('sh sh/createwallet.sh '
-        + req.query.walletname,
+    exec('sh sh/createWallet.sh '
+        + req.query.walletName,
         (error, stdout, stderr) =>
         {
             console.log(stdout);
@@ -61,11 +61,11 @@ app.get('/createwallet', function(req, rsp)
         });
 });
 
-app.get('/cekbalance', function(req, rsp)
+app.get('/checkBalance', function(req, rsp)
 {
     const { exec } = require('child_process');
-    exec('sh sh/cekbalance.sh '
-        + req.query.walletaddress,
+    exec('sh sh/checkBalance.sh '
+        + req.query.walletName,
         (error, stdout, stderr) =>
         {
             console.log(stdout);
