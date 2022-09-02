@@ -105,5 +105,6 @@ dist
 
 # Wallets
 wallets/*
+transfers/*
 protocol/*
 metadata/*
