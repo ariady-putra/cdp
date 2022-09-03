@@ -2,6 +2,30 @@ var express = require('express');
 var app     = express();
 app.use(express.static('public'));
 
+var head =
+'<html>\
+    <head>\
+        <title>Cardano Tools</title>\
+        <link rel="stylesheet" href="css/cdp.css"/>\
+    </head>\
+    <body>\
+        <center>\
+            <table height="100%">\
+                <tr>\
+                    <td valign="center">\
+                        <div class="badCafe" style="width:100%">\
+                            <hr/><center><h1>';
+var body =
+                            '</h1></center><hr/>\
+                        </div><br/><pre>';
+var tail =              '</pre>\
+                    </td>\
+                </tr>\
+            </table>\
+        </center>\
+    </body>\
+</html>';
+
 var server = app.listen(41506, function()
 {
     var host = server.address().address;
@@ -24,9 +48,11 @@ app.get('/queryTip', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + "Query Tip"
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -48,9 +74,11 @@ app.get('/createWallet', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + req.query.walletName
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -65,16 +93,18 @@ app.get('/checkBalance', function(req, rsp)
 {
     const { exec } = require('child_process');
     exec('sh sh/checkBalance.sh '
-        + req.query.walletName,
+        + req.query.wallet,
         (error, stdout, stderr) =>
         {
             console.log(stdout);
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + req.query.wallet
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -98,9 +128,13 @@ app.get('/transfer', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + "Transfer " + req.query.lovelaces + " Lovelaces "
+                    + "from " + req.query.walletNameSrc
+                    + " to " + req.query.walletNameDst
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -123,9 +157,11 @@ app.get('/submitMetadata', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + req.query.walletName
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -147,9 +183,11 @@ app.get('/retrieveMetadata', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + req.query.metadataKey
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -173,9 +211,13 @@ app.get('/createMultisigWallet', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + req.query.walletName1
+                    + req.query.walletName2
+                    + req.query.walletName3
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
@@ -202,9 +244,13 @@ app.get('/multisigTransfer', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send('<pre>'
+                rsp.send(head
+                    + "Transfer " + req.query.lovelaces + " Lovelaces "
+                    + "from " + req.query.walletNameMultisig
+                    + " to " + req.query.walletNameDst
+                    + body
                     + stdout.toString()
-                    + '</pre>');
+                    + tail);
             }
             else
             {
