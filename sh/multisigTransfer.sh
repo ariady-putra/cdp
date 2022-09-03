@@ -1,6 +1,9 @@
 # Get wallet addresses from wallet names
 WALLET_ADDR_SRC=$(cat wallets/$1/$1.addr)
-WALLET_ADDR_DST=$(cat wallets/$2/$2.addr)
+WALLET_ADDR_DST=$2
+if test -f wallets/$2/$2.addr; then
+    WALLET_ADDR_DST=$(cat wallets/$2/$2.addr)
+fi
 
 # Query UTXOs
 cardano-cli-1-35-3  query utxo  \
