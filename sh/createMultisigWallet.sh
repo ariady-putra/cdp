@@ -1,12 +1,22 @@
+# Get env cfg
+CARDANO_CLI="cardano-cli"
+if test -f ~/cardano/cfg/cli.cardano; then
+    CARDANO_CLI=$(cat ~/cardano/cfg/cli.cardano)
+fi
+CARDANO_MAGIC="--mainnet"
+if test -f ~/cardano/cfg/magic.cardano; then
+    CARDANO_MAGIC=$(cat ~/cardano/cfg/magic.cardano)
+fi
+
 # Check the arguments
 echo "MULTISIG wallet name is $1$2$3"
 
 # Generate key hashes
-KEYHASH1=$(cardano-cli-1-35-3   address key-hash    \
+KEYHASH1=$($CARDANO_CLI address key-hash    \
     --payment-verification-key-file wallets/$1/$1.vkey)
-KEYHASH2=$(cardano-cli-1-35-3   address key-hash    \
+KEYHASH2=$($CARDANO_CLI address key-hash    \
     --payment-verification-key-file wallets/$2/$2.vkey)
-KEYHASH3=$(cardano-cli-1-35-3   address key-hash    \
+KEYHASH3=$($CARDANO_CLI address key-hash    \
     --payment-verification-key-file wallets/$3/$3.vkey)
 
 # Create wallet directory
@@ -36,10 +46,10 @@ echo "\
 " > $1$2$3.multisig
 
 # Create wallet address
-cardano-cli-1-35-3  address build   \
+$CARDANO_CLI    address build   \
     --payment-script-file   $1$2$3.multisig \
     --out-file  $1$2$3.addr \
-    --testnet-magic 1
+    $CARDANO_MAGIC
 
 # Print info
 echo "MULTISIG wallet created:"

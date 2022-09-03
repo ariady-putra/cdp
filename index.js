@@ -227,10 +227,10 @@ app.get('/createMultisigWallet', function(req, rsp)
         });
 });
 
-app.get('/multisigTransfer', function(req, rsp)
+app.get('/transferMultisig', function(req, rsp)
 {
     const { exec } = require('child_process');
-    exec('sh sh/multisigTransfer.sh '
+    exec('sh sh/transferMultisig.sh '
         + req.query.walletNameMultisig  + ' '
         + req.query.walletNameDst       + ' '
         + req.query.lovelaces           + ' '

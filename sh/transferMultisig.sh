@@ -1,3 +1,17 @@
+# Get env cfg
+CARDANO_CLI="cardano-cli"
+if test -f ~/cardano/cfg/cli.cardano; then
+    CARDANO_CLI=$(cat ~/cardano/cfg/cli.cardano)
+fi
+CARDANO_MAGIC="--mainnet"
+if test -f ~/cardano/cfg/magic.cardano; then
+    CARDANO_MAGIC=$(cat ~/cardano/cfg/magic.cardano)
+fi
+CARDANO_ERA=""
+if test -f ~/cardano/cfg/era.cardano; then
+    CARDANO_ERA=$(cat ~/cardano/cfg/era.cardano)
+fi
+
 # Get wallet addresses from wallet names
 WALLET_ADDR_SRC=$(cat wallets/$1/$1.addr)
 WALLET_ADDR_DST=$2
@@ -6,9 +20,9 @@ if test -f wallets/$2/$2.addr; then
 fi
 
 # Query UTXOs
-cardano-cli-1-35-3  query utxo  \
+$CARDANO_CLI    query   utxo    \
     --address   $WALLET_ADDR_SRC    \
-    --testnet-magic 1   \
+    $CARDANO_MAGIC  \
     |   tail    +3  \
     >   utxo/$1.utxo
 TX_IN=""
@@ -22,40 +36,40 @@ done < utxo/$1.utxo
 # Build transaction raw file
 mkdir -p transfers/$1
 rm -f transfers/$1/$1.raw
-cardano-cli-1-35-3  transaction build   $TX_IN  \
+$CARDANO_CLI    transaction build   $TX_IN  \
     --tx-in-script-file wallets/$1/$1.multisig  \
     --witness-override  3   \
     --tx-out    $WALLET_ADDR_DST+$3 \
     --change-address    $WALLET_ADDR_SRC    \
     --out-file  transfers/$1/$1.raw \
-    --testnet-magic 1
+    $CARDANO_MAGIC  $CARDANO_ERA
 
 # View the transaction
-cardano-cli-1-35-3  transaction view    \
+$CARDANO_CLI    transaction view    \
     --tx-body-file  transfers/$1/$1.raw
 
 # Witness the transaction by each user
 rm -f transfers/$1/$1.$4
-cardano-cli-1-35-3  transaction witness \
+$CARDANO_CLI    transaction witness \
     --signing-key-file  wallets/$4/$4.skey  \
     --tx-body-file  transfers/$1/$1.raw \
     --out-file  transfers/$1/$1.$4
 
 rm -f transfers/$1/$1.$5
-cardano-cli-1-35-3  transaction witness \
+$CARDANO_CLI    transaction witness \
     --signing-key-file  wallets/$5/$5.skey  \
     --tx-body-file  transfers/$1/$1.raw \
     --out-file  transfers/$1/$1.$5
 
 rm -f transfers/$1/$1.$6
-cardano-cli-1-35-3  transaction witness \
+$CARDANO_CLI    transaction witness \
     --signing-key-file  wallets/$6/$6.skey  \
     --tx-body-file  transfers/$1/$1.raw \
     --out-file  transfers/$1/$1.$6
 
 # Assemble the transaction
 rm -f transfers/$1/$1.signed
-cardano-cli-1-35-3  transaction assemble    \
+$CARDANO_CLI    transaction assemble    \
     --tx-body-file  transfers/$1/$1.raw \
     --witness-file  transfers/$1/$1.$4  \
     --witness-file  transfers/$1/$1.$5  \
@@ -63,6 +77,6 @@ cardano-cli-1-35-3  transaction assemble    \
     --out-file  transfers/$1/$1.signed
 
 # Submit the transaction to the network
-cardano-cli-1-35-3  transaction submit  \
+$CARDANO_CLI    transaction submit  \
     --tx-file   transfers/$1/$1.signed  \
-    --testnet-magic 1
+    $CARDANO_MAGIC

@@ -1,3 +1,13 @@
+# Get env cfg
+CARDANO_CLI="cardano-cli"
+if test -f ~/cardano/cfg/cli.cardano; then
+    CARDANO_CLI=$(cat ~/cardano/cfg/cli.cardano)
+fi
+CARDANO_MAGIC="--mainnet"
+if test -f ~/cardano/cfg/magic.cardano; then
+    CARDANO_MAGIC=$(cat ~/cardano/cfg/magic.cardano)
+fi
+
 # Check the argument: walletname
 echo "Wallet name is $1"
 
@@ -6,22 +16,22 @@ mkdir -p wallets/$1
 cd wallets/$1
 
 # Create wallet payment keys
-cardano-cli-1-35-3  address key-gen \
+$CARDANO_CLI    address key-gen \
     --verification-key-file $1.vkey \
     --signing-key-file  $1.skey
 
 # Create wallet stake keys
-cardano-cli-1-35-3  stake-address   key-gen \
+$CARDANO_CLI    stake-address   key-gen \
     --verification-key-file $1.vkey.stake   \
     --signing-key-file  $1.skey.stake
 
 # Create wallet address
 rm -f $1.addr
-cardano-cli-1-35-3  address build   \
+$CARDANO_CLI    address build   \
     --payment-verification-key-file $1.vkey \
     --stake-verification-key-file   $1.vkey.stake   \
     --out-file  $1.addr \
-    --testnet-magic 1
+    $CARDANO_MAGIC
 
 # Print info
 echo "Wallet created:"
