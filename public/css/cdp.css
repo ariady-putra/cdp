@@ -1,19 +1,21 @@
 .badCafe
 {
+    border-radius       : 5px;
+    
     color               : #0A0A0A!important;
     background-color    : #BADCFE!important;
     
     font-family         : sans-serif;
     font-variant        : small-caps;
     font-weight         : bold;
-
+    
     margin-top          : 15px;
     margin-bottom       : 15px;
-
+    
     padding             : 0.01em 15px;
     
     box-shadow          : 0 5px 10px 0 #00000020, 0 5px 20px 0 #00000010;
-
+    
     width               : fit-content;
 }
 
