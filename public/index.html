@@ -1,102 +1,189 @@
 <html>
-    <head/>
+    <head>
+        <link rel="stylesheet" href="css/cdp.css"/>
+    </head>
     <body>
-        <form action="/createWallet" method="GET">
-            <input
-                type        = "text"
-                placeholder = "Enter wallet name"
-                id          = "walletName"
-                name        = "walletName"
-                required
-            />
-            <input
-                type  = "submit"
-                value = "Create Wallet"
-            />
-        </form>
-        <hr/>
-        <form action="/checkBalance" method="GET">
-            <input
-                type        = "text"
-                placeholder = "Enter wallet name"
-                id          = "walletName"
-                name        = "walletName"
-                required
-            />
-            <input
-                type  = "submit"
-                value = "Check Balance"
-            />
-        </form>
-        <hr/>
-        <form action="/submitMetadata" method="GET">
-            <input
-                type        = "text"
-                placeholder = "Enter wallet name"
-                id          = "walletName"
-                name        = "walletName"
-                required
-            />
-            <input
-                type  = "submit"
-                value = "Submit METADATA"
-            /><br/>
-            <textarea
-                id          = "metadataJson"
-                name        = "metadataJson"
-                rows        = "6"
-                cols        = "60"
-                required>
+        <div class="badCafe">
+            <hr/>
+            <form action="/createWallet" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter wallet name"
+                    id          = "walletName"
+                    name        = "walletName"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Create Wallet"
+                />
+            </form>
+            <hr/>
+            <form action="/checkBalance" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter wallet name"
+                    id          = "walletName"
+                    name        = "walletName"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Check Balance"
+                />
+            </form>
+            <hr/>
+            <form action="/transfer" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter src wallet name"
+                    id          = "walletNameSrc"
+                    name        = "walletNameSrc"
+                    required
+                />
+                <input
+                    type        = "text"
+                    placeholder = "Enter dst wallet name"
+                    id          = "walletNameDst"
+                    name        = "walletNameDst"
+                    required
+                />
+                <input
+                    type        = "number"
+                    placeholder = "Lovelaces"
+                    id          = "lovelaces"
+                    name        = "lovelaces"
+                    min         = "1000000"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Send Tx"
+                />
+            </form>
+        </div>
+        <div class="badCafe">
+            <hr/><center>Metadata</center><hr/>
+            <form action="/submitMetadata" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter wallet name"
+                    id          = "walletName"
+                    name        = "walletName"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Submit METADATA"
+                /><br/>
+                <textarea
+                    id          = "metadataJson"
+                    name        = "metadataJson"
+                    rows        = "6"
+                    cols        = "60"
+                    required>
 {
     "81672943": {
         "name": "Hello, World!",
         "completed": 1
     }
 }
-            </textarea>
-        </form>
-        <hr/>
-        <form action="/retrieveMetadata" method="GET">
-            <input
-                type        = "text"
-                placeholder = "Enter METADATA key"
-                id          = "metadataKey"
-                name        = "metadataKey"
-                required
-            />
-            <input
-                type  = "submit"
-                value = "Retrieve METADATA"
-            />
-        </form>
-        <hr/>
-        <form action="/transfer" method="GET">
-            <input
-                type        = "text"
-                placeholder = "Enter src wallet name"
-                id          = "walletNameSrc"
-                name        = "walletNameSrc"
-                required
-            />
-            <input
-                type        = "text"
-                placeholder = "Enter dst wallet name"
-                id          = "walletNameDst"
-                name        = "walletNameDst"
-                required
-            />
-            <input
-                type        = "number"
-                placeholder = "Lovelaces"
-                id          = "lovelaces"
-                name        = "lovelaces"
-                min         = "1000000"
-                required
-            />
-            <input
-                type  = "submit"
-                value = "Send Tx"
-            />
-        </form>
+                </textarea>
+            </form>
+            <hr/>
+            <form action="/retrieveMetadata" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter METADATA key"
+                    id          = "metadataKey"
+                    name        = "metadataKey"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Retrieve METADATA"
+                />
+            </form>
+        </div>
+        <div class="badCafe">
+            <hr/><center>Multisig</center><hr/>
+            <form action="/createMultisigWallet" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter wallet1 name"
+                    id          = "walletName1"
+                    name        = "walletName1"
+                    required
+                />
+                <input
+                    type        = "text"
+                    placeholder = "Enter wallet2 name"
+                    id          = "walletName2"
+                    name        = "walletName2"
+                    required
+                />
+                <input
+                    type        = "text"
+                    placeholder = "Enter wallet3 name"
+                    id          = "walletName3"
+                    name        = "walletName3"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Create MULTISIG Wallet"
+                />
+            </form>
+            <hr/>
+            <form action="/multisigTransfer" method="GET">
+                <input
+                    type        = "text"
+                    placeholder = "Enter MULTISIG wallet name"
+                    id          = "walletNameMultisig"
+                    name        = "walletNameMultisig"
+                    required
+                />
+                <input
+                    type        = "text"
+                    placeholder = "Enter dst wallet name"
+                    id          = "walletNameDst"
+                    name        = "walletNameDst"
+                    required
+                />
+                <input
+                    type        = "number"
+                    placeholder = "Lovelaces"
+                    id          = "lovelaces"
+                    name        = "lovelaces"
+                    min         = "1000000"
+                    required
+                />
+                <input
+                    type  = "submit"
+                    value = "Send MULTISIG Tx"
+                /><br/>
+                <input
+                    type        = "text"
+                    placeholder = "Witness 1"
+                    id          = "witness1"
+                    name        = "witness1"
+                    required
+                /><br/>
+                <input
+                    type        = "text"
+                    placeholder = "Witness 2"
+                    id          = "witness2"
+                    name        = "witness2"
+                    required
+                /><br/>
+                <input
+                    type        = "text"
+                    placeholder = "Witness 3"
+                    id          = "witness3"
+                    name        = "witness3"
+                    required
+                />
+            </form>
+        </div>
     </body>
 </html>

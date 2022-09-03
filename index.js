@@ -54,7 +54,7 @@ app.get('/createWallet', function(req, rsp)
             }
             else
             {
-                console.log('createwallet error:',
+                console.log('createWallet error:',
                             error);
                 rsp.send(error.toString());
             }
@@ -78,7 +78,33 @@ app.get('/checkBalance', function(req, rsp)
             }
             else
             {
-                console.log('cekbalance error:',
+                console.log('checkBalance error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/transfer', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/transfer.sh '
+        + req.query.walletNameSrc + ' '
+        + req.query.walletNameDst + ' '
+        + req.query.lovelaces,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send('<pre>'
+                    + stdout.toString()
+                    + '</pre>');
+            }
+            else
+            {
+                console.log('submitTransfer error:',
                             error);
                 rsp.send(error.toString());
             }
@@ -134,13 +160,13 @@ app.get('/retrieveMetadata', function(req, rsp)
         });
 });
 
-app.get('/transfer', function(req, rsp)
+app.get('/createMultisigWallet', function(req, rsp)
 {
     const { exec } = require('child_process');
-    exec('sh sh/transfer.sh '
-        + req.query.walletNameSrc + ' '
-        + req.query.walletNameDst + ' '
-        + req.query.lovelaces,
+    exec('sh sh/createMultisigWallet.sh '
+        + req.query.walletName1 + ' '
+        + req.query.walletName2 + ' '
+        + req.query.walletName3,
         (error, stdout, stderr) =>
         {
             console.log(stdout);
@@ -153,7 +179,36 @@ app.get('/transfer', function(req, rsp)
             }
             else
             {
-                console.log('submitTransfer error:',
+                console.log('createMultisigWallet error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/multisigTransfer', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/multisigTransfer.sh '
+        + req.query.walletNameMultisig  + ' '
+        + req.query.walletNameDst       + ' '
+        + req.query.lovelaces           + ' '
+        + req.query.witness1            + ' '
+        + req.query.witness2            + ' '
+        + req.query.witness3,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send('<pre>'
+                    + stdout.toString()
+                    + '</pre>');
+            }
+            else
+            {
+                console.log('submitMultisigTransfer error:',
                             error);
                 rsp.send(error.toString());
             }

@@ -2,7 +2,7 @@
 echo "Wallet name is $1"
 
 # Create wallet directory
-mkdir wallets/$1
+mkdir -p wallets/$1
 cd wallets/$1
 
 # Create wallet payment keys
@@ -16,6 +16,7 @@ cardano-cli-1-35-3  stake-address   key-gen \
     --signing-key-file  $1.skey.stake
 
 # Create wallet address
+rm -f $1.addr
 cardano-cli-1-35-3  address build   \
     --payment-verification-key-file $1.vkey \
     --stake-verification-key-file   $1.vkey.stake   \
@@ -25,7 +26,7 @@ cardano-cli-1-35-3  address build   \
 # Print info
 echo "Wallet created:"
 
-# List wallets directory
+# List the wallet directory files
 ls
 
 # Print the new wallet address
