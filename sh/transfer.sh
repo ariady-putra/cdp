@@ -6,7 +6,7 @@ if test -f wallets/$2/$2.addr; then
 fi
 
 # Query UTXOs
-cardano-cli-1-35-3  query utxo  \
+cardano-cli-1-35-3  query   utxo    \
     --address   $WALLET_ADDR_SRC    \
     --testnet-magic 1   \
     |   tail    +3  \

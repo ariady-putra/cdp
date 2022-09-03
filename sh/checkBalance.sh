@@ -6,5 +6,5 @@ fi
 
 # Query UTXOs
 cardano-cli-1-35-3  query   utxo    \
-    --address $WALLET   \
+    --address   $WALLET \
     --testnet-magic 1

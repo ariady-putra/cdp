@@ -15,8 +15,7 @@ var head =
                     <td valign="center">\
                         <div class="badCafe" style="width:100%">\
                             <hr/><center><h1>';
-var body =
-                            '</h1></center><hr/>\
+var body =                  '</h1></center><hr/>\
                         </div><br/><pre>';
 var tail =              '</pre>\
                     </td>\

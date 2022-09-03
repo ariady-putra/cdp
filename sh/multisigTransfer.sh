@@ -23,7 +23,7 @@ done < utxo/$1.utxo
 mkdir -p transfers/$1
 rm -f transfers/$1/$1.raw
 cardano-cli-1-35-3  transaction build   $TX_IN  \
-    --tx-in-script-file wallets/$1/$1.multisig \
+    --tx-in-script-file wallets/$1/$1.multisig  \
     --witness-override  3   \
     --tx-out    $WALLET_ADDR_DST+$3 \
     --change-address    $WALLET_ADDR_SRC    \
@@ -32,35 +32,35 @@ cardano-cli-1-35-3  transaction build   $TX_IN  \
 
 # View the transaction
 cardano-cli-1-35-3  transaction view    \
-    --tx-body-file transfers/$1/$1.raw
+    --tx-body-file  transfers/$1/$1.raw
 
 # Witness the transaction by each user
 rm -f transfers/$1/$1.$4
 cardano-cli-1-35-3  transaction witness \
-    --signing-key-file wallets/$4/$4.skey   \
+    --signing-key-file  wallets/$4/$4.skey  \
     --tx-body-file  transfers/$1/$1.raw \
     --out-file  transfers/$1/$1.$4
 
 rm -f transfers/$1/$1.$5
 cardano-cli-1-35-3  transaction witness \
-    --signing-key-file wallets/$5/$5.skey   \
+    --signing-key-file  wallets/$5/$5.skey  \
     --tx-body-file  transfers/$1/$1.raw \
     --out-file  transfers/$1/$1.$5
 
 rm -f transfers/$1/$1.$6
 cardano-cli-1-35-3  transaction witness \
-    --signing-key-file wallets/$6/$6.skey   \
+    --signing-key-file  wallets/$6/$6.skey  \
     --tx-body-file  transfers/$1/$1.raw \
     --out-file  transfers/$1/$1.$6
 
 # Assemble the transaction
 rm -f transfers/$1/$1.signed
 cardano-cli-1-35-3  transaction assemble    \
-    --tx-body-file transfers/$1/$1.raw  \
-    --witness-file transfers/$1/$1.$4   \
-    --witness-file transfers/$1/$1.$5   \
-    --witness-file transfers/$1/$1.$6   \
-    --out-file transfers/$1/$1.signed
+    --tx-body-file  transfers/$1/$1.raw \
+    --witness-file  transfers/$1/$1.$4  \
+    --witness-file  transfers/$1/$1.$5  \
+    --witness-file  transfers/$1/$1.$6  \
+    --out-file  transfers/$1/$1.signed
 
 # Submit the transaction to the network
 cardano-cli-1-35-3  transaction submit  \
