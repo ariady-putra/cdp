@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=Application;
+Exec=~/runcpreview.sh
+GenericName=cardano-preview
+Icon=~/Pictures/cardano_we_logos/PNG/Cardano-RGB_Logo-Icon-Blue.png
+Name=Run CPreview
+Terminal=true
+Type=Application

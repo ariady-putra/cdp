@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=Application;
+Exec=~/runct.sh
+GenericName=cardano-testnet
+Icon=~/Pictures/cardano_we_logos/PNG/Cardano-RGB_Logo-Icon-White.png
+Name=Run CTestnet
+Terminal=true
+Type=Application

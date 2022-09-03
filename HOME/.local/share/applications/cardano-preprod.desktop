@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=Application;
+Exec=~/runcpreprod.sh
+GenericName=cardano-preprod
+Icon=~/Pictures/cardano_we_logos/PNG/Cardano-RGB_Logo-Icon-Black.png
+Name=Run CPreprod
+Terminal=true
+Type=Application
