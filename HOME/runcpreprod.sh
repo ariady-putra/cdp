@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cp -fs ~/.local/bin/cardano-node-1-35-3 ~/.local/bin/cardano-node
+cp -fs ~/.local/bin/cardano-cli-1-35-3 ~/.local/bin/cardano-cli
+
 echo "preprod" > ~/cardano/cfg/net.cardano
 echo "cardano-node-1-35-3" > ~/cardano/cfg/node.cardano
 echo "cardano-cli-1-35-3" > ~/cardano/cfg/cli.cardano
