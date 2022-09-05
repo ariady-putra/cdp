@@ -82,3 +82,8 @@ $CARDANO_CLI    transaction sign    \
 $CARDANO_CLI    transaction submit  \
 	--tx-file   metadata/$1/$1.signed   \
 	$CARDANO_MAGIC
+
+# Show the result tx hash
+echo "\nTxHash:"
+$CARDANO_CLI    transaction txid    \
+    --tx-file   metadata/$1/$1.signed
