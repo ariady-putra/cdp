@@ -7,7 +7,7 @@ echo "preprod" > ~/cardano/cfg/net.cardano
 echo "cardano-node-1-35-3" > ~/cardano/cfg/node.cardano
 echo "cardano-cli-1-35-3" > ~/cardano/cfg/cli.cardano
 echo "--testnet-magic 1" > ~/cardano/cfg/magic.cardano
-rm -f ~/cardano/cfg/era.cardano
+echo "--alonzo-era" > ~/cardano/cfg/era.cardano
 
 cardano-node-1-35-3 run \
     --topology ~/cardano/src/cardano-node/configuration/cardano/preprod-topology.json \
