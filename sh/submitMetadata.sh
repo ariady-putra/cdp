@@ -32,7 +32,7 @@ done < utxo/$1.utxo
 
 # Write metadata-json-file
 mkdir -p metadata/$1
-echo "$2" > metadata/$1/$1.json
+echo $2 > metadata/$1/$1.json
 
 # Create transaction draft
 rm -f metadata/$1/$1.draft
@@ -78,7 +78,7 @@ $CARDANO_CLI    transaction sign    \
 	--out-file  metadata/$1/$1.signed   \
 	$CARDANO_MAGIC
 
-# Submit the transaction
+# Submit the transaction to the network
 $CARDANO_CLI    transaction submit  \
 	--tx-file   metadata/$1/$1.signed   \
 	$CARDANO_MAGIC

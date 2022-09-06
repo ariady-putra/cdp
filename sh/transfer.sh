@@ -49,8 +49,8 @@ $CARDANO_CLI    transaction view    \
 # Sign the transaction
 rm -f transfers/$1/$1.signed
 $CARDANO_CLI    transaction sign    \
-    --signing-key-file wallets/$1/$1.skey   \
     --tx-body-file  transfers/$1/$1.raw \
+    --signing-key-file  wallets/$1/$1.skey  \
     --out-file  transfers/$1/$1.signed  \
     $CARDANO_MAGIC
 
