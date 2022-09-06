@@ -19,7 +19,7 @@ $CARDANO_CLI    query   utxo    \
     >   utxo/$1.utxo
 TX_IN=""
 AMOUNT=0
-IN_COUNT=0;
+IN_COUNT=0
 while read UTXO
 do
     TX_HASH=$(echo $UTXO | cut -d ' ' -f1)
