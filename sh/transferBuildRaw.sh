@@ -67,7 +67,7 @@ FEE=$($CARDANO_CLI  transaction calculate-min-fee   \
 SLOT=$($CARDANO_CLI query   tip \
     $CARDANO_MAGIC  \
     |   sed -n  '6p'    \
-    |   cut -d  ' ' -f6 \
+    |   cut -d  ':' -f2 \
     |   tr  ',' ' ')
 INVALID_HEREAFTER=$(expr $SLOT + 60 \* $4)
 echo "Current  slot  is  $SLOT"
