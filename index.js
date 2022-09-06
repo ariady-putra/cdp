@@ -144,6 +144,37 @@ app.get('/transfer', function(req, rsp)
         });
 });
 
+app.get('/transferBuildRaw', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/transferBuildRaw.sh '
+        + req.query.walletNameSrc   + ' '
+        + req.query.walletNameDst   + ' '
+        + req.query.lovelaces       + ' '
+        + req.query.minutes,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Transfer " + req.query.lovelaces + " Lovelaces "
+                    + "from " + req.query.walletNameSrc
+                    + " to " + req.query.walletNameDst
+                    + body
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('submitTransferBuildRaw error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
 app.get('/submitMetadata', function(req, rsp)
 {
     const { exec } = require('child_process');

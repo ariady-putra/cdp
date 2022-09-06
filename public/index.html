@@ -69,6 +69,42 @@
                                     value = "Send Tx"
                                 />
                             </form>
+                            <hr/>
+                            <form action="/transferBuildRaw" method="GET">
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter src wallet name"
+                                    id          = "walletNameSrc"
+                                    name        = "walletNameSrc"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter dst wallet name or addr"
+                                    id          = "walletNameDst"
+                                    name        = "walletNameDst"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Valid for how many minutes"
+                                    id          = "minutes"
+                                    name        = "minutes"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Lovelaces"
+                                    id          = "lovelaces"
+                                    name        = "lovelaces"
+                                    min         = "1000000"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Send Tx"
+                                />
+                            </form>
                         </div>
                         <div align="left" class="badCafe">
                             <hr/><center>Metadata</center><hr/>
