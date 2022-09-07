@@ -20,7 +20,7 @@
                                     placeholder = "Enter wallet name"
                                     id          = "walletName"
                                     name        = "walletName"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -36,7 +36,7 @@
                                     placeholder = "Enter wallet name or address"
                                     id          = "wallet"
                                     name        = "wallet"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -53,7 +53,7 @@
                                     placeholder = "Enter src wallet name"
                                     id          = "walletNameSrc"
                                     name        = "walletNameSrc"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -62,7 +62,7 @@
                                     placeholder = "Enter dst wallet name or addr"
                                     id          = "walletNameDst"
                                     name        = "walletNameDst"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -87,7 +87,7 @@
                                     placeholder = "Enter src wallet name"
                                     id          = "walletNameSrc"
                                     name        = "walletNameSrc"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -96,7 +96,7 @@
                                     placeholder = "Enter dst wallet name or addr"
                                     id          = "walletNameDst"
                                     name        = "walletNameDst"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -121,16 +121,110 @@
                                     value = "Send Tx"
                                 />
                             </form>
+                            <hr/>
+                            <form action="/transferMultiwitness" method="GET">
+                                transfer multiwitness<br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter src wallet1 name"
+                                    id          = "walletNameSrc1"
+                                    name        = "walletNameSrc1"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter dst wallet name or addr"
+                                    id          = "walletNameDst"
+                                    name        = "walletNameDst"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter chg wallet name or addr"
+                                    id          = "walletNameChg"
+                                    name        = "walletNameChg"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Lovelaces"
+                                    id          = "lovelaces"
+                                    name        = "lovelaces"
+                                    min         = "1000000"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Send Tx"
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter src wallet2 name"
+                                    id          = "walletNameSrc2"
+                                    name        = "walletNameSrc2"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                            </form>
+                            <hr/>
+                            <form action="/transferAtomicSwap" method="GET">
+                                transfer atomic-swap<br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter wallet1 name"
+                                    id          = "walletName1"
+                                    name        = "walletName1"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Lovelaces"
+                                    id          = "lovelaces1"
+                                    name        = "lovelaces1"
+                                    min         = "1000000"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Send Tx"
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter wallet2 name"
+                                    id          = "walletName2"
+                                    name        = "walletName2"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Lovelaces"
+                                    id          = "lovelaces2"
+                                    name        = "lovelaces2"
+                                    min         = "1000000"
+                                    required
+                                />
+                            </form>
                         </div>
                         <div align="left" class="badCafe">
-                            <hr/><center>Multisig</center><hr/>
+                            <hr/><center>Multisig Wallet</center><hr/>
                             <form action="/createMultisigWallet" method="GET">
                                 <input
                                     type        = "text"
                                     placeholder = "Enter wallet1 name"
                                     id          = "walletName1"
                                     name        = "walletName1"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -139,7 +233,7 @@
                                     placeholder = "Enter wallet2 name"
                                     id          = "walletName2"
                                     name        = "walletName2"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -148,7 +242,7 @@
                                     placeholder = "Enter wallet3 name"
                                     id          = "walletName3"
                                     name        = "walletName3"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -164,7 +258,7 @@
                                     placeholder = "Enter MULTISIG wallet name"
                                     id          = "walletNameMultisig"
                                     name        = "walletNameMultisig"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -173,7 +267,7 @@
                                     placeholder = "Enter dst wallet name or addr"
                                     id          = "walletNameDst"
                                     name        = "walletNameDst"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -194,7 +288,7 @@
                                     placeholder = "Witness 1"
                                     id          = "witness1"
                                     name        = "witness1"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 /><br/>
@@ -203,7 +297,7 @@
                                     placeholder = "Witness 2"
                                     id          = "witness2"
                                     name        = "witness2"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 /><br/>
@@ -212,7 +306,7 @@
                                     placeholder = "Witness 3"
                                     id          = "witness3"
                                     name        = "witness3"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -226,7 +320,7 @@
                                     placeholder = "Enter wallet name"
                                     id          = "walletName"
                                     name        = "walletName"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
@@ -255,7 +349,7 @@
                                     placeholder = "Enter METADATA key"
                                     id          = "metadataKey"
                                     name        = "metadataKey"
-                                    title       = "Alphanumeric and underscore only"
+                                    title       = "Alphanumeric and underscore only."
                                     pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />

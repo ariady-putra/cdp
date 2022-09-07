@@ -176,6 +176,67 @@ app.get('/transferBuildRaw', function(req, rsp)
         });
 });
 
+app.get('/transferMultiwitness', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/transferMultiwitness.sh '
+        + req.query.walletNameSrc1  + ' '
+        + req.query.walletNameSrc2  + ' '
+        + req.query.walletNameDst   + ' '
+        + req.query.walletNameChg   + ' '
+        + req.query.lovelaces,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Transfer " + req.query.lovelaces + " Lovelaces "
+                    + " to " + req.query.walletNameDst
+                    + body
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('submitTransferMultiwitness error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/transferAtomicSwap', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/transferAtomicSwap.sh '
+        + req.query.walletName1 + ' '
+        + req.query.walletName2 + ' '
+        + req.query.lovelaces1  + ' '
+        + req.query.lovelaces2,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Swapping " + req.query.walletName1
+                    +   " and "   + req.query.walletName2
+                    + body
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('submitTransferAtomicSwap error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
 app.get('/createMultisigWallet', function(req, rsp)
 {
     const { exec } = require('child_process');
