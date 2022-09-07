@@ -27,7 +27,7 @@ $CARDANO_CLI    query   utxo    \
     |   tail    +3  \
     >   utxo/$1.utxo
 TX_IN=""
-AMOUNT=0
+AMOUNT=-$3
 IN_COUNT=0
 while read UTXO
 do
@@ -43,7 +43,7 @@ done < utxo/$1.utxo
 rm -f transfers/$1/$1.raw
 $CARDANO_CLI    transaction build-raw   $TX_IN  \
 	--tx-out    $WALLET_ADDR_DST+$3 \
-	--tx-out    $WALLET_ADDR_SRC+$AMOUNT    \
+	--tx-out    $WALLET_ADDR_SRC+0  \
     --invalid-hereafter 0   \
 	--fee   0   \
 	--out-file  transfers/$1/$1.raw
@@ -78,7 +78,7 @@ echo "Invalid hereafter: $INVALID_HEREAFTER"
 rm -f transfers/$1/$1.raw
 $CARDANO_CLI    transaction build-raw   $TX_IN  \
 	--tx-out    $WALLET_ADDR_DST+$3 \
-	--tx-out    $WALLET_ADDR_SRC+$(expr $AMOUNT - $3 - $FEE)    \
+	--tx-out    $WALLET_ADDR_SRC+$(expr $AMOUNT - $FEE) \
     --invalid-hereafter $INVALID_HEREAFTER  \
 	--fee   $FEE    \
 	--out-file  transfers/$1/$1.raw
