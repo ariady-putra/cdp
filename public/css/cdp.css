@@ -2,7 +2,7 @@
 {
     border-radius       : 5px;
     
-    color               : #0A0A0A!important;
+    color               : #050913!important;
     background-color    : #BADCFE!important;
     
     cursor              : default;
@@ -16,7 +16,7 @@
     
     padding             : 0.01em 15px;
     
-    box-shadow          : 0 5px 10px 0 #00000020, 0 5px 20px 0 #00000010;
+    box-shadow          : 0 5px 10px 0 #0509133C, 0 5px 20px 0 #BADCFE1A;
     
     width               : fit-content;
 }
