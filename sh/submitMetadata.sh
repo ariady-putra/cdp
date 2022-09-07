@@ -12,6 +12,7 @@ fi
 WALLET_ADDR=$(cat wallets/$1/$1.addr)
 
 # Query UTXOs
+echo "$WALLET_ADDR:\n"
 $CARDANO_CLI    query   utxo    \
     --address   $WALLET_ADDR    \
     $CARDANO_MAGIC  \

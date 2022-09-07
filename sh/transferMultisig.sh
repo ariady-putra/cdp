@@ -20,6 +20,7 @@ if test -f wallets/$2/$2.addr; then
 fi
 
 # Query UTXOs
+echo "$WALLET_ADDR_SRC:\n"
 $CARDANO_CLI    query   utxo    \
     --address   $WALLET_ADDR_SRC    \
     $CARDANO_MAGIC  \
@@ -80,3 +81,8 @@ $CARDANO_CLI    transaction assemble    \
 $CARDANO_CLI    transaction submit  \
     --tx-file   transfers/$1/$1.signed  \
     $CARDANO_MAGIC
+
+# Show the result tx hash
+echo "\nTxHash:"
+$CARDANO_CLI    transaction txid    \
+    --tx-file   transfers/$1/$1.signed

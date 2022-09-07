@@ -15,6 +15,7 @@ if test -f wallets/$1/$1.addr; then
 fi
 
 # Query UTXOs
+echo "$WALLET:\n"
 $CARDANO_CLI    query   utxo    \
     --address   $WALLET \
     $CARDANO_MAGIC
