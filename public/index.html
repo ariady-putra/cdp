@@ -20,6 +20,8 @@
                                     placeholder = "Enter wallet name"
                                     id          = "walletName"
                                     name        = "walletName"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -34,6 +36,8 @@
                                     placeholder = "Enter wallet name or address"
                                     id          = "wallet"
                                     name        = "wallet"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -49,6 +53,8 @@
                                     placeholder = "Enter src wallet name"
                                     id          = "walletNameSrc"
                                     name        = "walletNameSrc"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -56,6 +62,8 @@
                                     placeholder = "Enter dst wallet name or addr"
                                     id          = "walletNameDst"
                                     name        = "walletNameDst"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -79,6 +87,8 @@
                                     placeholder = "Enter src wallet name"
                                     id          = "walletNameSrc"
                                     name        = "walletNameSrc"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -86,6 +96,8 @@
                                     placeholder = "Enter dst wallet name or addr"
                                     id          = "walletNameDst"
                                     name        = "walletNameDst"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -111,6 +123,102 @@
                             </form>
                         </div>
                         <div align="left" class="badCafe">
+                            <hr/><center>Multisig</center><hr/>
+                            <form action="/createMultisigWallet" method="GET">
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter wallet1 name"
+                                    id          = "walletName1"
+                                    name        = "walletName1"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter wallet2 name"
+                                    id          = "walletName2"
+                                    name        = "walletName2"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter wallet3 name"
+                                    id          = "walletName3"
+                                    name        = "walletName3"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Create MULTISIG Wallet"
+                                />
+                            </form>
+                            <hr/>
+                            <form action="/transferMultisig" method="GET">
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter MULTISIG wallet name"
+                                    id          = "walletNameMultisig"
+                                    name        = "walletNameMultisig"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter dst wallet name or addr"
+                                    id          = "walletNameDst"
+                                    name        = "walletNameDst"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Lovelaces"
+                                    id          = "lovelaces"
+                                    name        = "lovelaces"
+                                    min         = "1000000"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Send MULTISIG Tx"
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Witness 1"
+                                    id          = "witness1"
+                                    name        = "witness1"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Witness 2"
+                                    id          = "witness2"
+                                    name        = "witness2"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "Witness 3"
+                                    id          = "witness3"
+                                    name        = "witness3"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                            </form>
+                        </div>
+                        <div align="left" class="badCafe">
                             <hr/><center>Metadata</center><hr/>
                             <form action="/submitMetadata" method="GET">
                                 <input
@@ -118,6 +226,8 @@
                                     placeholder = "Enter wallet name"
                                     id          = "walletName"
                                     name        = "walletName"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
@@ -145,91 +255,13 @@
                                     placeholder = "Enter METADATA key"
                                     id          = "metadataKey"
                                     name        = "metadataKey"
+                                    title       = "Alphanumeric and underscore only"
+                                    pattern     = "[0-9A-Za-z_]+"
                                     required
                                 />
                                 <input
                                     type  = "submit"
                                     value = "Retrieve METADATA"
-                                />
-                            </form>
-                        </div>
-                        <div align="left" class="badCafe">
-                            <hr/><center>Multisig</center><hr/>
-                            <form action="/createMultisigWallet" method="GET">
-                                <input
-                                    type        = "text"
-                                    placeholder = "Enter wallet1 name"
-                                    id          = "walletName1"
-                                    name        = "walletName1"
-                                    required
-                                />
-                                <input
-                                    type        = "text"
-                                    placeholder = "Enter wallet2 name"
-                                    id          = "walletName2"
-                                    name        = "walletName2"
-                                    required
-                                />
-                                <input
-                                    type        = "text"
-                                    placeholder = "Enter wallet3 name"
-                                    id          = "walletName3"
-                                    name        = "walletName3"
-                                    required
-                                />
-                                <input
-                                    type  = "submit"
-                                    value = "Create MULTISIG Wallet"
-                                />
-                            </form>
-                            <hr/>
-                            <form action="/transferMultisig" method="GET">
-                                <input
-                                    type        = "text"
-                                    placeholder = "Enter MULTISIG wallet name"
-                                    id          = "walletNameMultisig"
-                                    name        = "walletNameMultisig"
-                                    required
-                                />
-                                <input
-                                    type        = "text"
-                                    placeholder = "Enter dst wallet name or addr"
-                                    id          = "walletNameDst"
-                                    name        = "walletNameDst"
-                                    required
-                                />
-                                <input
-                                    type        = "number"
-                                    placeholder = "Lovelaces"
-                                    id          = "lovelaces"
-                                    name        = "lovelaces"
-                                    min         = "1000000"
-                                    required
-                                />
-                                <input
-                                    type  = "submit"
-                                    value = "Send MULTISIG Tx"
-                                /><br/>
-                                <input
-                                    type        = "text"
-                                    placeholder = "Witness 1"
-                                    id          = "witness1"
-                                    name        = "witness1"
-                                    required
-                                /><br/>
-                                <input
-                                    type        = "text"
-                                    placeholder = "Witness 2"
-                                    id          = "witness2"
-                                    name        = "witness2"
-                                    required
-                                /><br/>
-                                <input
-                                    type        = "text"
-                                    placeholder = "Witness 3"
-                                    id          = "witness3"
-                                    name        = "witness3"
-                                    required
                                 />
                             </form>
                         </div>

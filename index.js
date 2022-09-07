@@ -176,59 +176,6 @@ app.get('/transferBuildRaw', function(req, rsp)
         });
 });
 
-app.get('/submitMetadata', function(req, rsp)
-{
-    const { exec } = require('child_process');
-    exec('sh sh/submitMetadata.sh '
-        + req.query.walletName  + ' "'
-        + req.query.metadataJson.trim().split("\"").join("\\\"") + '"',
-        (error, stdout, stderr) =>
-        {
-            console.log(stdout);
-            console.log(stderr);
-            if(error == null)
-            {
-                rsp.send(head
-                    + req.query.walletName
-                    + body
-                    + stdout.toString()
-                    + tail);
-            }
-            else
-            {
-                console.log('submitMetadata error:',
-                            error);
-                rsp.send(error.toString());
-            }
-        });
-});
-
-app.get('/retrieveMetadata', function(req, rsp)
-{
-    const { exec } = require('child_process');
-    exec('sh sh/retrieveMetadata.sh '
-        + req.query.metadataKey,
-        (error, stdout, stderr) =>
-        {
-            console.log(stdout);
-            console.log(stderr);
-            if(error == null)
-            {
-                rsp.send(head
-                    + req.query.metadataKey
-                    + body
-                    + stdout.toString()
-                    + tail);
-            }
-            else
-            {
-                console.log('retrieveMetadata error:',
-                            error);
-                rsp.send(error.toString());
-            }
-        });
-});
-
 app.get('/createMultisigWallet', function(req, rsp)
 {
     const { exec } = require('child_process');
@@ -286,6 +233,59 @@ app.get('/transferMultisig', function(req, rsp)
             else
             {
                 console.log('submitMultisigTransfer error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/submitMetadata', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/submitMetadata.sh '
+        + req.query.walletName  + ' "'
+        + req.query.metadataJson.trim().split("\"").join("\\\"") + '"',
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + req.query.walletName
+                    + body
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('submitMetadata error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/retrieveMetadata', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/retrieveMetadata.sh '
+        + req.query.metadataKey,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + req.query.metadataKey
+                    + body
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('retrieveMetadata error:',
                             error);
                 rsp.send(error.toString());
             }
