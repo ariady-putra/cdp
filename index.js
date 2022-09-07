@@ -6,6 +6,7 @@ var head =
 '<html>\
     <head>\
         <title>Cardano Tools</title>\
+        <link rel="icon" type="image/x-icon" href="img/Cardano-RGB_Logo-Icon-Blue.png">\
         <link rel="stylesheet" href="css/cdp.css"/>\
     </head>\
     <body>\
