@@ -343,7 +343,7 @@ app.get('/retrieveMetadata', function(req, rsp)
                 rsp.send(head
                     + req.query.metadataKey
                     + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + stdout.toString()
                     + tail);
             }
             else
