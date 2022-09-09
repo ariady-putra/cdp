@@ -69,7 +69,8 @@ SLOT=$($CARDANO_CLI query   tip \
     $CARDANO_MAGIC  \
     |   sed -n  '6p'    \
     |   cut -d  ':' -f2 \
-    |   tr  ',' ' ')
+    |   tr  ',' ' ' \
+    |   xargs)
 INVALID_HEREAFTER=$(expr $SLOT + 60 \* $4)
 echo "Current  slot  is  $SLOT"
 echo "Invalid hereafter: $INVALID_HEREAFTER"

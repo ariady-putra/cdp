@@ -23,12 +23,29 @@ KEYHASH3=$($CARDANO_CLI address key-hash    \
 mkdir -p wallets/$1$2$3
 cd wallets/$1$2$3
 
+# Get current slot to calculate validity period
+SLOT=$($CARDANO_CLI query   tip \
+    $CARDANO_MAGIC  \
+    |   sed -n  '6p'    \
+    |   cut -d  ':' -f2 \
+    |   tr  ',' ' ' \
+    |   xargs)
+VALID_AFTER=$(expr $SLOT + 60 \* $4)
+echo "Curr.  slot  is  $SLOT"
+echo "Valid after slot $VALID_AFTER"
+
 # Create the multisig policy script file
+echo "Script:"
+# https://github.com/mallapurbharat/cardano-tx-sample/blob/main/multisig/multisig_explanation.md#json-script-syntax
 echo "\
 {\r
     \"type\": \"all\",\r
     \"scripts\":\r
     [\r
+        {\r
+            \"type\": \"after\",\r
+            \"slot\": $VALID_AFTER\r
+        },\r
         {\r
             \"type\": \"sig\",\r
             \"keyHash\": \"$KEYHASH1\"\r
@@ -44,6 +61,7 @@ echo "\
     ]\r
 }\
 " > $1$2$3.multisig
+cat $1$2$3.multisig
 
 # Create wallet address
 $CARDANO_CLI    address build   \

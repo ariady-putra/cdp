@@ -34,11 +34,24 @@ do
     TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
 done < utxo/$1.utxo
 
+# Get current slot to calculate validity period
+SLOT=$($CARDANO_CLI query   tip \
+    $CARDANO_MAGIC  \
+    |   sed -n  '6p'    \
+    |   cut -d  ':' -f2 \
+    |   tr  ',' ' ' \
+    |   xargs)
+INVALID_HEREAFTER=$(expr $SLOT + 60 \* $7)
+echo "Current  slot  is  $SLOT"
+echo "Invalid hereafter: $INVALID_HEREAFTER"
+
 # Build transaction raw file
 mkdir -p transfers/$1
 rm -f transfers/$1/$1.raw
 $CARDANO_CLI    transaction build   $TX_IN  \
     --tx-in-script-file wallets/$1/$1.multisig  \
+    --invalid-before    $SLOT   \
+    --invalid-hereafter $INVALID_HEREAFTER  \
     --witness-override  3   \
     --tx-out    $WALLET_ADDR_DST+$3 \
     --change-address    $WALLET_ADDR_SRC    \
