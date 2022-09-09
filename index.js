@@ -51,7 +51,7 @@ app.get('/queryTip', function(req, rsp)
                 rsp.send(head
                     + "Query Tip"
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -77,7 +77,7 @@ app.get('/createWallet', function(req, rsp)
                 rsp.send(head
                     + req.query.walletName
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -103,7 +103,7 @@ app.get('/checkBalance', function(req, rsp)
                 rsp.send(head
                     + req.query.wallet
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -133,7 +133,7 @@ app.get('/transfer', function(req, rsp)
                     + "from " + req.query.walletNameSrc
                     + " to " + req.query.walletNameDst
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -164,7 +164,7 @@ app.get('/transferBuildRaw', function(req, rsp)
                     + "from " + req.query.walletNameSrc
                     + " to " + req.query.walletNameDst
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -195,7 +195,7 @@ app.get('/transferMultiwitness', function(req, rsp)
                     + "Transfer " + req.query.lovelaces + " Lovelaces "
                     + " to " + req.query.walletNameDst
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -225,7 +225,7 @@ app.get('/transferAtomicSwap', function(req, rsp)
                     + "Swapping " + req.query.walletName1
                     +   " and "   + req.query.walletName2
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -243,7 +243,8 @@ app.get('/createMultisigWallet', function(req, rsp)
     exec('sh sh/createMultisigWallet.sh '
         + req.query.walletName1 + ' '
         + req.query.walletName2 + ' '
-        + req.query.walletName3,
+        + req.query.walletName3 + ' '
+        + req.query.minutes,
         (error, stdout, stderr) =>
         {
             console.log(stdout);
@@ -255,7 +256,7 @@ app.get('/createMultisigWallet', function(req, rsp)
                     + req.query.walletName2
                     + req.query.walletName3
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -276,7 +277,8 @@ app.get('/transferMultisig', function(req, rsp)
         + req.query.lovelaces           + ' '
         + req.query.witness1            + ' '
         + req.query.witness2            + ' '
-        + req.query.witness3,
+        + req.query.witness3            + ' '
+        + req.query.minutes,
         (error, stdout, stderr) =>
         {
             console.log(stdout);
@@ -288,7 +290,7 @@ app.get('/transferMultisig', function(req, rsp)
                     + "from " + req.query.walletNameMultisig
                     + " to " + req.query.walletNameDst
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -315,7 +317,7 @@ app.get('/submitMetadata', function(req, rsp)
                 rsp.send(head
                     + req.query.walletName
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
@@ -341,7 +343,7 @@ app.get('/retrieveMetadata', function(req, rsp)
                 rsp.send(head
                     + req.query.metadataKey
                     + body
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
