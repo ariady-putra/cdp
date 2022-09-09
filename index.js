@@ -307,7 +307,8 @@ app.get('/submitMetadata', function(req, rsp)
     const { exec } = require('child_process');
     exec('sh sh/submitMetadata.sh '
         + req.query.walletName  + ' "'
-        + req.query.metadataJson.trim().split("\"").join("\\\"") + '"',
+        + req.query.metadataJson.trim().split("\"").join("\\\"") + '" '
+        + req.query.schemaJson,
         (error, stdout, stderr) =>
         {
             console.log(stdout);

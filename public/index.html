@@ -4,7 +4,7 @@
         <link rel="icon" type="image/x-icon" href="img/Cardano-RGB_Logo-Icon-Blue.png">
         <link rel="stylesheet" href="css/cdp.css"/>
     </head>
-    <body>
+    <body onload="setMetadataJson()">
         <center>
             <table height="100%">
                 <tr>
@@ -344,18 +344,20 @@
                                     type  = "submit"
                                     value = "Submit METADATA"
                                 /><br/>
+                                <select id="schemaJson" name="schemaJson" onchange="setMetadataJson()">
+                                    <option value="--json-metadata-no-schema">
+                                        No schema
+                                    </option>
+                                    <option value="--json-metadata-detailed-schema">
+                                        Detailed schema
+                                    </option>
+                                </select><br/>
                                 <textarea
                                     id          = "metadataJson"
                                     name        = "metadataJson"
                                     rows        = "6"
                                     cols        = "60"
                                     required>
-{
-    "81672943": {
-        "name": "Hello, World!",
-        "completed": 1
-    }
-}
                                 </textarea>
                             </form>
                             <hr/>
@@ -379,5 +381,73 @@
                 </tr>
             </table>
         </center>
+        <script>
+            function setMetadataJson()
+            {
+                const schemaJson   = document.getElementById("schemaJson").value;
+                const metadataJson = document.getElementById("metadataJson");
+                // metadataJson.focus();
+                
+                const now = new Date();
+                var yyyy  = now.getFullYear();
+                var MM    = now.getMonth() + 1;
+                var dd    = now.getDate();
+                if(MM < 10) MM = `0${MM}`;
+                if(dd < 10) dd = `0${dd}`;
+                
+                if(schemaJson === "--json-metadata-detailed-schema")
+                {
+                    var HH = now.getHours();
+                    var mm = now.getMinutes();
+                    if(HH < 10) HH = `0${HH}`;
+                    if(mm < 10) mm = `0${mm}`;
+                    // metadataJson.scrollIntoView();
+                    metadataJson.style.height = "426px";
+                    metadataJson.innerHTML    =
+`{\r\
+    "${yyyy}${MM}${dd}${HH}${mm}":\r\
+    {\r\
+        "map":\r\
+        [\r\
+            {\r\
+                "k":\r\
+                {\r\
+                    "string": "ToDo Item 1"\r\
+                },\r\
+                "v":\r\
+                {\r\
+                    "string": "Book Flight Tickets"\r\
+                }\r\
+            },\r\
+            {\r\
+                "k":\r\
+                {\r\
+                    "string": "status"\r\
+                },\r\
+                "v":\r\
+                {\r\
+                    "string": "completed"\r\
+                }\r\
+            }\r\
+        ]\r\
+    }\r\
+}`;
+                }
+                else
+                {
+                    metadataJson.style.height = "96px";
+                    metadataJson.innerHTML    =
+`{\r
+    "${yyyy}${MM}${dd}": {\r
+        "name": "Hello, World!",\r
+        "completed": 1\r
+    }\r
+}`;
+                }
+                
+                // const sel = metadataJson.innerHTML.length;
+                // metadataJson.setSelectionRange(sel, sel);
+            }
+        </script>
     </body>
 </html>
