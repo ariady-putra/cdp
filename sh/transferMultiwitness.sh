@@ -94,15 +94,6 @@ $CARDANO_CLI    transaction build-raw   $TX_IN  \
 $CARDANO_CLI    transaction view    \
     --tx-body-file  transfers/$1/$1.raw
 
-# # Sign the transaction
-# rm -f transfers/$1/$1.signed
-# $CARDANO_CLI    transaction sign    \
-#     --tx-body-file  transfers/$1/$1.raw \
-#     --signing-key-file  wallets/$1/$1.skey  \
-#     --signing-key-file  wallets/$2/$2.skey  \
-#     --out-file  transfers/$1/$1.signed  \
-#     $CARDANO_MAGIC
-
 # Witness the transaction by each user
 rm -f transfers/$1/$1.witness
 $CARDANO_CLI    transaction witness \

@@ -10,19 +10,17 @@ var head =
         <link rel="stylesheet" href="css/cdp.css"/>\
     </head>\
     <body>\
-        <center>\
-            <table height="100%">\
-                <tr>\
-                    <td valign="center">\
-                        <div class="badCafe" style="width:100%">\
-                            <hr/><center><h1>';
-var body =                  '</h1></center><hr/>\
-                        </div><br/><pre>';
-var tail =              '</pre>\
-                    </td>\
-                </tr>\
-            </table>\
-        </center>\
+        <table style="height:100%; margin-left:auto; margin-right:auto;">\
+            <tr>\
+                <td style="vertical-align:middle">\
+                    <div class="badCafe" style="width:100%">\
+                        <hr/><h1 style="text-align:center">';
+var body =              '</h1><hr/>\
+                    </div><br/><pre>';
+var tail =          '</pre>\
+                </td>\
+            </tr>\
+        </table>\
     </body>\
 </html>';
 
