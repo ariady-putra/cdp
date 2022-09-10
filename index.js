@@ -337,13 +337,14 @@ app.get('/retrieveMetadata', function(req, rsp)
         + req.query.metadataKey,
         (error, stdout, stderr) =>
         {
-            console.log(stdout);
             console.log(stderr);
+            console.log(stdout);
             if(error == null)
             {
                 rsp.send(head
                     + req.query.metadataKey
                     + body
+                    + stderr.toString()
                     + stdout.toString()
                     + tail);
             }
