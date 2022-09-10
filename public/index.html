@@ -403,7 +403,7 @@
                     if(mm < 10) mm = `0${mm}`;
                     // metadataJson.scrollIntoView();
                     metadataJson.style.height = "426px";
-                    metadataJson.innerHTML    =
+                    metadataJson.value        =
 `{\r\
     "${yyyy}${MM}${dd}${HH}${mm}":\r\
     {\r\
@@ -436,7 +436,7 @@
                 else
                 {
                     metadataJson.style.height = "96px";
-                    metadataJson.innerHTML    =
+                    metadataJson.value        =
 `{\r
     "${yyyy}${MM}${dd}": {\r
         "name": "Hello, World!",\r
