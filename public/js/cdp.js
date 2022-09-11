@@ -1,18 +1,34 @@
+function loadBody()
+{
+    setPanelDisplayFor("transaction build");
+    setPanelDisplayFor("transaction build-raw");
+    setPanelDisplayFor("transfer multiwitness");
+    setPanelDisplayFor("transfer atomic-swap");
+    setPanelDisplayFor("multisig wallet");
+    setPanelDisplayFor("metadata");
+    setMetadataJson();
+}
+
+function setPanelDisplayFor(name)
+{
+    const element = name.toLowerCase().replace(" ", "").replace("-", "");
+    const display = localStorage.getItem(element.toString());
+    if(display)
+    {
+        const title = document.getElementById(element + "Title");
+        const panel = document.getElementById(element + "Panel");
+        title.innerHTML = (panel.style.display = display) === "none" ?
+            "▸ <u>" + name + "</u>" : "▾ <u>" + name + "</u>";
+    }
+}
+
 function togglePanel(name)
 {
-    const elementName = name.toLowerCase().replace(" ", "").replace("-", "");
-    const panelTitle  = document.getElementById(elementName + "Title");
-    const panelPanel  = document.getElementById(elementName + "Panel");
-    if(panelPanel.style.display === "none")
-    {
-        panelTitle.innerHTML     = "▾ <u>" + name + "</u>";
-        panelPanel.style.display = "block";
-    }
-    else
-    {
-        panelTitle.innerHTML     = "▸ <u>" + name + "</u>";
-        panelPanel.style.display = "none";
-    }
+    const element = name.toLowerCase().replace(" ", "").replace("-", "");
+    localStorage.setItem(element.toString(),
+        document.getElementById(element + "Panel").style.display === "none" ?
+            "block" : "none");
+    setPanelDisplayFor(name);
 }
 
 function setMetadataJson()
