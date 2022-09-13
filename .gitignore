@@ -107,5 +107,6 @@ dist
 wallets/*
 utxo/*
 transfers/*
+tokens/*
 protocol/*
 metadata/*
