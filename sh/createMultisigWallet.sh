@@ -36,7 +36,7 @@ echo "Valid after slot $VALID_AFTER"
 
 # Create the multisig policy script file
 echo "Script:"
-# https://github.com/mallapurbharat/cardano-tx-sample/blob/main/multisig/multisig_explanation.md#json-script-syntax
+# https://github.com/input-output-hk/cardano-node/blob/c6b574229f76627a058a7e559599d2fc3f40575d/doc/reference/simple-scripts.md#multisignature-scripts
 echo "\
 {\r
     \"type\": \"all\",\r
