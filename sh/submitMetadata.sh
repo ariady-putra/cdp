@@ -21,10 +21,14 @@ $CARDANO_CLI    query   utxo    \
 TX_IN=""
 while read UTXO
 do
-    TX_HASH=$(echo $UTXO | cut -d ' ' -f1)
-    TX_IX=$(echo $UTXO | cut -d ' ' -f2)
-    TX_AMOUNT=$(echo $UTXO | cut -d ' ' -f3)
-    TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
+    TX_HASH=$(echo      $UTXO | cut -d ' ' -f1)
+    TX_IX=$(echo        $UTXO | cut -d ' ' -f2)
+    TX_AMOUNT=$(echo    $UTXO | cut -d ' ' -f3)
+    
+    IS_TOKEN=$(echo     $UTXO | cut -d ' ' -f8)
+    if ! [ $IS_TOKEN ]; then
+        TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
+    fi
 done < utxo/$1.utxo
 
 # Write metadata-json-file

@@ -31,12 +31,16 @@ AMOUNT=-$3
 IN_COUNT=0
 while read UTXO
 do
-    TX_HASH=$(echo $UTXO | cut -d ' ' -f1)
-    TX_IX=$(echo $UTXO | cut -d ' ' -f2)
-    TX_AMOUNT=$(echo $UTXO | cut -d ' ' -f3)
-    TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
-    AMOUNT=$(expr $AMOUNT + $TX_AMOUNT)
-    IN_COUNT=$(expr $IN_COUNT + 1)
+    TX_HASH=$(echo      $UTXO | cut -d ' ' -f1)
+    TX_IX=$(echo        $UTXO | cut -d ' ' -f2)
+    TX_AMOUNT=$(echo    $UTXO | cut -d ' ' -f3)
+    
+    IS_TOKEN=$(echo     $UTXO | cut -d ' ' -f8)
+    if ! [ $IS_TOKEN ]; then
+        TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
+        AMOUNT=$(expr   $AMOUNT + $TX_AMOUNT)
+        IN_COUNT=$(expr $IN_COUNT + 1)
+    fi
 done < utxo/$1.utxo
 
 # Create transaction draft
