@@ -487,6 +487,39 @@
                                     value = "Send tokens"
                                 />
                             </form>
+                            <hr/>
+                            <form action="/tokenBurn" method="GET">
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter wallet name (minter)"
+                                    id          = "walletName"
+                                    name        = "walletName"
+                                    title       = "Token minter: Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter token name"
+                                    id          = "tokenName"
+                                    name        = "tokenName"
+                                    title       = "Alphanumeric, underscore and spaces only."
+                                    pattern     = "[0-9A-Za-z_ ]+"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Enter token amount"
+                                    id          = "tokenAmount"
+                                    name        = "tokenAmount"
+                                    min         = "1"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Burn tokens"
+                                />
+                            </form>
                         </div>
                     </div>
                 </td>

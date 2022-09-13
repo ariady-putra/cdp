@@ -371,7 +371,7 @@ app.get('/tokenMint', function(req, rsp)
                 rsp.send(head
                     + "Minting " + req.query.tokenAmount
                     + " "        + req.query.tokenName
-                    +   " for "  + req.query.walletName
+                    +   " to "   + req.query.walletName
                     + body
                     + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
@@ -411,6 +411,36 @@ app.get('/tokenSend', function(req, rsp)
             else
             {
                 console.log('tokenSend error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/tokenBurn', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/tokenBurn.sh '
+        + req.query.walletName  + ' "'
+        + req.query.tokenName   + '" '
+        + req.query.tokenAmount,
+        (error, stdout, stderr) =>
+        {
+            console.log(stderr);
+            console.log(stdout);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Burning " + req.query.tokenAmount
+                    + " "        + req.query.tokenName
+                    +   " from " + req.query.walletName
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('tokenBurn error:',
                             error);
                 rsp.send(error.toString());
             }
