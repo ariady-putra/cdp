@@ -6,6 +6,7 @@ function loadBody()
     setPanelDisplayFor("transfer atomic-swap");
     setPanelDisplayFor("multisig wallet");
     setPanelDisplayFor("metadata");
+    setPanelDisplayFor("native tokens");
     setMetadataJson();
 }
 

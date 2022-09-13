@@ -355,3 +355,34 @@ app.get('/retrieveMetadata', function(req, rsp)
         });
 });
 
+app.get('/tokenMint', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/tokenMint.sh '
+        + req.query.walletName  + ' "'
+        + req.query.tokenName   + '" '
+        + req.query.tokenAmount,
+        (error, stdout, stderr) =>
+        {
+            console.log(stderr);
+            console.log(stdout);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Minting " + req.query.tokenAmount
+                    + " "        + req.query.tokenName
+                    +   " for "  + req.query.walletName
+                    + body
+                    + stderr.toString()
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('tokenMint error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
