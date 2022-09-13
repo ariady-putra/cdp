@@ -24,7 +24,7 @@ echo "$WALLET_ADDR_SRC:\n"
 mkdir -p tokens/$1
 
 # Generate Base16 token name
-TOKEN_NAME=$(echo $2 | xxd -ps)
+TOKEN_NAME=$(echo $2 | xxd -p)
 
 # Query UTXOs
 $CARDANO_CLI    query   utxo    \
