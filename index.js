@@ -373,13 +373,44 @@ app.get('/tokenMint', function(req, rsp)
                     + " "        + req.query.tokenName
                     +   " for "  + req.query.walletName
                     + body
-                    + stderr.toString()
-                    + stdout.toString()
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
                     + tail);
             }
             else
             {
                 console.log('tokenMint error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/tokenSend', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/tokenSend.sh '
+        + req.query.walletNameSrc   + ' "'
+        + req.query.tokenName       + '" '
+        + req.query.tokenAmount     + ' '
+        + req.query.walletNameDst,
+        (error, stdout, stderr) =>
+        {
+            console.log(stderr);
+            console.log(stdout);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Sending " + req.query.tokenAmount
+                    + " "        + req.query.tokenName
+                    +   " from " + req.query.walletNameSrc
+                    +     " to " + req.query.walletNameDst
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('tokenSend error:',
                             error);
                 rsp.send(error.toString());
             }

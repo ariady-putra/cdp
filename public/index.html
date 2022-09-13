@@ -445,6 +445,48 @@
                                     value = "Mint tokens"
                                 />
                             </form>
+                            <hr/>
+                            <form action="/tokenSend" method="GET">
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter src wallet name"
+                                    id          = "walletNameSrc"
+                                    name        = "walletNameSrc"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter dst wallet name or addr"
+                                    id          = "walletNameDst"
+                                    name        = "walletNameDst"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                />
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter token name"
+                                    id          = "tokenName"
+                                    name        = "tokenName"
+                                    title       = "Alphanumeric, underscore and spaces only."
+                                    pattern     = "[0-9A-Za-z_ ]+"
+                                    required
+                                />
+                                <input
+                                    type        = "number"
+                                    placeholder = "Enter token amount"
+                                    id          = "tokenAmount"
+                                    name        = "tokenAmount"
+                                    min         = "1"
+                                    required
+                                />
+                                <input
+                                    type  = "submit"
+                                    value = "Send tokens"
+                                />
+                            </form>
                         </div>
                     </div>
                 </td>
