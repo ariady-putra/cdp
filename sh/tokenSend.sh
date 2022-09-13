@@ -23,26 +23,6 @@ echo "$WALLET_ADDR_SRC:\n"
 # Create tokens directory
 mkdir -p tokens/$1
 
-# Generate key hashes
-KEYHASH=$($CARDANO_CLI  address key-hash    \
-    --payment-verification-key-file wallets/$1/$1.vkey)
-
-# Create the token policy script file
-echo "Script:"
-# https://github.com/mallapurbharat/cardano-tx-sample/blob/main/native-tokens/1_Fungible_Token_Exercise.md#generate-the-policy
-echo "\
-{\r
-    \"type\": \"sig\",\r
-    \"keyHash\": \"$KEYHASH\"\r
-}\
-" > tokens/$1/$1.script
-cat tokens/$1/$1.script
-
-# Create the token policy ID
-# https://github.com/mallapurbharat/cardano-tx-sample/blob/main/native-tokens/1_Fungible_Token_Exercise.md#asset-minting
-POLICY_ID=$($CARDANO_CLI    transaction policyid    \
-    --script-file   tokens/$1/$1.script)
-
 # Generate Base16 token name
 TOKEN_NAME=$(echo $2 | xxd -ps)
 
@@ -54,6 +34,7 @@ $CARDANO_CLI    query   utxo    \
     >   utxo/$1.utxo
 TX_IN=""
 TOKEN_AMOUNT=-$3
+POLICY_ID=""
 while read UTXO
 do
     TX_HASH=$(echo  $UTXO | cut -d ' ' -f1)
@@ -63,7 +44,8 @@ do
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
-    if [ "$IS_TOKEN" = "$POLICY_ID.$TOKEN_NAME" ]; then
+    if [ "$TOKEN_NAME" = "$(echo $IS_TOKEN | cut -d '.' -f2)" ]; then
+        POLICY_ID=$(echo $IS_TOKEN | cut -d '.' -f1)
         AMOUNT=$(echo $UTXO | cut -d ' ' -f6)
         TOKEN_AMOUNT=$(expr $TOKEN_AMOUNT + $AMOUNT)
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
