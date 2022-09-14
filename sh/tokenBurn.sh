@@ -59,7 +59,7 @@ do
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
-    if [ "$IS_TOKEN" = "$POLICY_ID.$TOKEN_NAME" ]; then
+    if [ $TOKEN_AMOUNT -lt $3 ] && [ "$IS_TOKEN" = "$POLICY_ID.$TOKEN_NAME" ]; then
         AMOUNT=$(echo $UTXO | cut -d ' ' -f6)
         TOKEN_AMOUNT=$(expr $TOKEN_AMOUNT + $AMOUNT)
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
