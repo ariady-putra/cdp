@@ -69,16 +69,33 @@ MIN_REQ_UTXO=$($CARDANO_CLI transaction build   $TX_IN  \
     --change-address    $WALLET_ADDR    \
     --out-file  tokens/$1/$1.raw    \
     $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
-
-# Rebuild transaction raw file
-rm -f tokens/$1/$1.raw
-$CARDANO_CLI    transaction build   $TX_IN  \
-    --tx-out    $WALLET_ADDR+${MIN_REQ_UTXO##* }+"$3 $POLICY_ID.$TOKEN_NAME"    \
+FEE=$($CARDANO_CLI  transaction build   $TX_IN  \
+    --tx-out    $WALLET_ADDR+${MIN_REQ_UTXO##* }+"$3    $POLICY_ID.$TOKEN_NAME" \
     --mint  "$3 $POLICY_ID.$TOKEN_NAME" \
     --minting-script-file   tokens/$1/$1.script \
     --change-address    $WALLET_ADDR    \
     --out-file  tokens/$1/$1.raw    \
-    $CARDANO_MAGIC  $CARDANO_ERA
+    $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
+
+# Rebuild transaction raw file
+rm -f tokens/$1/$1.raw
+if [ ${FEE##* } -gt ${MIN_REQ_UTXO##* } ]; then
+    $CARDANO_CLI    transaction build   $TX_IN  \
+        --tx-out    $WALLET_ADDR+${FEE##* }+"$3 $POLICY_ID.$TOKEN_NAME" \
+        --mint  "$3 $POLICY_ID.$TOKEN_NAME" \
+        --minting-script-file   tokens/$1/$1.script \
+        --change-address    $WALLET_ADDR    \
+        --out-file  tokens/$1/$1.raw    \
+        $CARDANO_MAGIC  $CARDANO_ERA
+else
+    $CARDANO_CLI    transaction build   $TX_IN  \
+        --tx-out    $WALLET_ADDR+${MIN_REQ_UTXO##* }+"$3    $POLICY_ID.$TOKEN_NAME" \
+        --mint  "$3 $POLICY_ID.$TOKEN_NAME" \
+        --minting-script-file   tokens/$1/$1.script \
+        --change-address    $WALLET_ADDR    \
+        --out-file  tokens/$1/$1.raw    \
+        $CARDANO_MAGIC  $CARDANO_ERA
+fi
 
 # View the transaction
 $CARDANO_CLI    transaction view    \

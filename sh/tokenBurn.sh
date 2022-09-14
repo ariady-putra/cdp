@@ -59,7 +59,7 @@ do
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
-    if [ $TOKEN_AMOUNT -lt $3 ] && [ "$IS_TOKEN" = "$POLICY_ID.$TOKEN_NAME" ]; then
+    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$IS_TOKEN" = "$POLICY_ID.$TOKEN_NAME" ]; then
         AMOUNT=$(echo $UTXO | cut -d ' ' -f6)
         TOKEN_AMOUNT=$(expr $TOKEN_AMOUNT + $AMOUNT)
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
@@ -76,22 +76,32 @@ if [ $TOKEN_AMOUNT -gt 0 ]; then
         --change-address    $WALLET_ADDR    \
         --out-file  tokens/$1/$1.raw    \
         $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
-    rm -f tokens/$1/$1.raw
-    $CARDANO_CLI    transaction build   $TX_IN  \
+    FEE=$($CARDANO_CLI  transaction build   $TX_IN  \
         --tx-out    $WALLET_ADDR+${MIN_REQ_UTXO##* }+"$TOKEN_AMOUNT $POLICY_ID.$TOKEN_NAME" \
         --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
         --minting-script-file   tokens/$1/$1.script \
         --change-address    $WALLET_ADDR    \
         --out-file  tokens/$1/$1.raw    \
-        $CARDANO_MAGIC  $CARDANO_ERA
-else
-    rm -f tokens/$1/$1.raw
-    MIN_REQ_UTXO=$($CARDANO_CLI transaction build   $TX_IN  \
-        --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
-        --minting-script-file   tokens/$1/$1.script \
-        --change-address    $WALLET_ADDR    \
-        --out-file  tokens/$1/$1.raw    \
         $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
+    rm -f tokens/$1/$1.raw
+    if [ ${FEE##* } -gt ${MIN_REQ_UTXO##* } ]; then
+        $CARDANO_CLI    transaction build   $TX_IN  \
+            --tx-out    $WALLET_ADDR+${FEE##* }+"$TOKEN_AMOUNT  $POLICY_ID.$TOKEN_NAME" \
+            --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
+            --minting-script-file   tokens/$1/$1.script \
+            --change-address    $WALLET_ADDR    \
+            --out-file  tokens/$1/$1.raw    \
+            $CARDANO_MAGIC  $CARDANO_ERA
+    else
+        $CARDANO_CLI    transaction build   $TX_IN  \
+            --tx-out    $WALLET_ADDR+${MIN_REQ_UTXO##* }+"$TOKEN_AMOUNT $POLICY_ID.$TOKEN_NAME" \
+            --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
+            --minting-script-file   tokens/$1/$1.script \
+            --change-address    $WALLET_ADDR    \
+            --out-file  tokens/$1/$1.raw    \
+            $CARDANO_MAGIC  $CARDANO_ERA
+    fi
+else
     rm -f tokens/$1/$1.raw
     $CARDANO_CLI    transaction build   $TX_IN  \
         --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
