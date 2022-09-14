@@ -58,7 +58,7 @@ POLICY_ID=$($CARDANO_CLI    transaction policyid    \
     --script-file   tokens/$1/$1.script)
 
 # Generate Base16 token name
-TOKEN_NAME=$(echo $2 | xxd -p)
+TOKEN_NAME=$(echo -n $2 | xxd -p)
 
 # Build transaction raw file
 rm -f tokens/$1/$1.raw
