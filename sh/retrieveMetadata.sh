@@ -10,5 +10,5 @@ fi
 
 # Retrieve METADATA from Blockfrost
 curl    -H  "project_id:$PID"    \
-    https://cardano-$CARDANO_NET.blockfrost.io/api/v0/metadata/txs/labels/$1    \
+    https://cardano-$CARDANO_NET.blockfrost.io/api/v0/metadata/txs/labels/$1?order=desc \
     |   jq
