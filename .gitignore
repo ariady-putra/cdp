@@ -109,4 +109,5 @@ utxo/*
 transfers/*
 tokens/*
 protocol/*
+nft/*
 metadata/*
