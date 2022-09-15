@@ -7,6 +7,9 @@ function loadBody()
     setPanelDisplayFor("multisig wallet");
     setPanelDisplayFor("metadata");
     setPanelDisplayFor("native tokens");
+    setPanelDisplayFor("NFT mint");
+    setPanelDisplayFor("NFT send");
+    setPanelDisplayFor("NFT burn");
     setMetadataJson();
 }
 

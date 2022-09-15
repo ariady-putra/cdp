@@ -520,6 +520,190 @@
                                     value = "Burn tokens"
                                 />
                             </form>
+                            <hr/>
+                            <form action="/nftMint" method="GET">
+                                <a  id      = "nftmintTitle"
+                                    onclick = "togglePanel('NFT mint')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>NFT mint</u></a>
+                                <div id="nftmintPanel" style="display:none">
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter wallet name (minter)"
+                                        id          = "walletName"
+                                        name        = "walletName"
+                                        title       = "NFT minter: Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter policy name"
+                                        id          = "policyName"
+                                        name        = "policyName"
+                                        title       = "Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Valid for how many minutes"
+                                        id          = "minutes"
+                                        name        = "minutes"
+                                        min         = "1"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter NFT name"
+                                        id          = "nftName"
+                                        name        = "nftName"
+                                        title       = "Alphanumeric, underscore and spaces only."
+                                        pattern     = "[0-9A-Za-z_ ]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter NFT description"
+                                        id          = "nftDesc"
+                                        name        = "nftDesc"
+                                        title       = "Alphanumeric, underscore, spaces, comma and period only."
+                                        pattern     = "[0-9A-Za-z_ ,.]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "ipfs://image"
+                                        id          = "nftImg"
+                                        name        = "nftImg"
+                                        title       = "Alphanumeric, colon and slash only."
+                                        pattern     = "[0-9A-Za-z:/]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Enter NFT ID"
+                                        id          = "nftID"
+                                        name        = "nftID"
+                                        min         = "1"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Enter NFT count"
+                                        id          = "nftCount"
+                                        name        = "nftCount"
+                                        min         = "1"
+                                        required
+                                    />
+                                    <input
+                                        type  = "submit"
+                                        value = "Mint NFT"
+                                    />
+                                </div>
+                            </form>
+                            <hr/>
+                            <!-- NFT Sending is the same as token sending -->
+                            <form action="/tokenSend" method="GET">
+                                <a  id      = "nftsendTitle"
+                                    onclick = "togglePanel('NFT send')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>NFT send</u></a>
+                                <div id="nftsendPanel" style="display:none">
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter src wallet name"
+                                        id          = "walletNameSrc"
+                                        name        = "walletNameSrc"
+                                        title       = "Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter dst wallet name or addr"
+                                        id          = "walletNameDst"
+                                        name        = "walletNameDst"
+                                        title       = "Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter NFT name"
+                                        id          = "tokenName"
+                                        name        = "tokenName"
+                                        title       = "Alphanumeric, underscore and spaces only."
+                                        pattern     = "[0-9A-Za-z_ ]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Enter NFT count"
+                                        id          = "tokenAmount"
+                                        name        = "tokenAmount"
+                                        min         = "1"
+                                        required
+                                    />
+                                    <input
+                                        type  = "submit"
+                                        value = "Send NFT"
+                                    />
+                                </div>
+                            </form>
+                            <hr/>
+                            <form action="/nftBurn" method="GET">
+                                <a  id      = "nftburnTitle"
+                                    onclick = "togglePanel('NFT burn')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>NFT burn</u></a>
+                                <div id="nftburnPanel" style="display:none">
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter wallet name (minter)"
+                                        id          = "walletName"
+                                        name        = "walletName"
+                                        title       = "NFT minter: Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter policy name"
+                                        id          = "policyName"
+                                        name        = "policyName"
+                                        title       = "Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter NFT name"
+                                        id          = "nftName"
+                                        name        = "nftName"
+                                        title       = "Alphanumeric, underscore and spaces only."
+                                        pattern     = "[0-9A-Za-z_ ]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Enter NFT count"
+                                        id          = "nftCount"
+                                        name        = "nftCount"
+                                        min         = "1"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Valid for how many minutes"
+                                        id          = "minutes"
+                                        name        = "minutes"
+                                        min         = "1"
+                                        required
+                                    />
+                                    <input
+                                        type  = "submit"
+                                        value = "Burn NFT"
+                                    />
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </td>

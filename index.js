@@ -447,3 +447,73 @@ app.get('/tokenBurn', function(req, rsp)
         });
 });
 
+app.get('/nftMint', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/nftMint.sh '
+        + req.query.walletName  + ' '
+        + req.query.policyName  + ' '
+        + req.query.minutes     + ' "'
+        + req.query.nftName     + '" "'
+        + req.query.nftDesc     + '" '
+        + req.query.nftImg      + ' '
+        + req.query.nftID       + ' '
+        + req.query.nftCount,
+        (error, stdout, stderr) =>
+        {
+            console.log(stderr);
+            console.log(stdout);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Minting " + req.query.nftCount
+                    + " "        + req.query.policyName
+                    +   "."      + req.query.nftName
+                    +   "."      + req.query.nftID
+                    +     " to " + req.query.walletName
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('nftMint error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/nftBurn', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/nftBurn.sh '
+        + req.query.walletName  + ' "'
+        + req.query.nftName     + '" '
+        + req.query.nftCount    + ' '
+        + req.query.policyName  + ' '
+        + req.query.minutes,
+        (error, stdout, stderr) =>
+        {
+            console.log(stderr);
+            console.log(stdout);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Burning " + req.query.nftCount
+                    + " "        + req.query.policyName
+                    +   "."      + req.query.nftName
+                    +   " from " + req.query.walletName
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('nftBurn error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
