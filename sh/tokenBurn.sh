@@ -23,22 +23,6 @@ mkdir -p tokens/$1
 KEYHASH=$($CARDANO_CLI  address key-hash    \
     --payment-verification-key-file wallets/$1/$1.vkey)
 
-# Create the token policy script file
-echo "Script:"
-# https://github.com/mallapurbharat/cardano-tx-sample/blob/main/native-tokens/1_Fungible_Token_Exercise.md#generate-the-policy
-echo "\
-{\r
-    \"type\": \"sig\",\r
-    \"keyHash\": \"$KEYHASH\"\r
-}\
-" > tokens/$1/$1.script
-cat tokens/$1/$1.script
-
-# Create the token policy ID
-# https://github.com/mallapurbharat/cardano-tx-sample/blob/main/native-tokens/1_Fungible_Token_Exercise.md#asset-minting
-POLICY_ID=$($CARDANO_CLI    transaction policyid    \
-    --script-file   tokens/$1/$1.script)
-
 # Generate Base16 token name
 TOKEN_NAME=$(echo -n $2 | xxd -p)
 
@@ -50,6 +34,7 @@ $CARDANO_CLI    query   utxo    \
     >   utxo/$1.utxo
 TX_IN=""
 TOKEN_AMOUNT=-$3
+POLICY_ID=""
 while read UTXO
 do
     TX_HASH=$(echo  $UTXO | cut -d ' ' -f1)
@@ -59,7 +44,8 @@ do
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
-    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$IS_TOKEN" = "$POLICY_ID.$TOKEN_NAME" ]; then
+    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$TOKEN_NAME" = "$(echo $IS_TOKEN | cut -d '.' -f2)" ]; then
+        POLICY_ID=$(echo $IS_TOKEN | cut -d '.' -f1)
         AMOUNT=$(echo $UTXO | cut -d ' ' -f6)
         TOKEN_AMOUNT=$(expr $TOKEN_AMOUNT + $AMOUNT)
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
@@ -76,6 +62,10 @@ if [ $TOKEN_AMOUNT -gt 0 ]; then
         --change-address    $WALLET_ADDR    \
         --out-file  tokens/$1/$1.raw    \
         $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
+    case "${MIN_REQ_UTXO##* }" in
+        ''|*[!0-9]*) echo $MIN_REQ_UTXO; exit 0 ;;
+        *) echo "Min req UTXO: Lovelace ${MIN_REQ_UTXO##* }" ;;
+    esac
     FEE=$($CARDANO_CLI  transaction build   $TX_IN  \
         --tx-out    $WALLET_ADDR+${MIN_REQ_UTXO##* }+"$TOKEN_AMOUNT $POLICY_ID.$TOKEN_NAME" \
         --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
@@ -83,6 +73,10 @@ if [ $TOKEN_AMOUNT -gt 0 ]; then
         --change-address    $WALLET_ADDR    \
         --out-file  tokens/$1/$1.raw    \
         $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
+    case "${FEE##* }" in
+        ''|*[!0-9]*) echo $FEE; exit 0 ;;
+        *) echo "Readjustment: Lovelace ${FEE##* }" ;;
+    esac
     rm -f tokens/$1/$1.raw
     if [ ${FEE##* } -gt ${MIN_REQ_UTXO##* } ]; then
         $CARDANO_CLI    transaction build   $TX_IN  \
