@@ -26,10 +26,7 @@ cd wallets/$1$2$3
 # Get current slot to calculate validity period
 SLOT=$($CARDANO_CLI query   tip \
     $CARDANO_MAGIC  \
-    |   sed -n  '6p'    \
-    |   cut -d  ':' -f2 \
-    |   tr  ',' ' ' \
-    |   xargs)
+    |   jq  '.slot')
 VALID_AFTER=$(expr $SLOT + 60 \* $4)
 echo "Curr.  slot  is  $SLOT"
 echo "Valid after slot $VALID_AFTER"

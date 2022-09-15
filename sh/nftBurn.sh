@@ -59,10 +59,7 @@ done < utxo/$1.utxo
 MINUTES=$5
 SLOT=$($CARDANO_CLI query   tip \
     $CARDANO_MAGIC  \
-    |   sed -n  '6p'    \
-    |   cut -d  ':' -f2 \
-    |   tr  ',' ' ' \
-    |   xargs)
+    |   jq  '.slot')
 INVALID_HEREAFTER=$(expr $SLOT + 60 \* $MINUTES)
 echo "Current  slot  is  $SLOT"
 echo "Burnable till slot $INVALID_HEREAFTER"

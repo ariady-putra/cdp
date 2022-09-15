@@ -46,10 +46,7 @@ NFT_COUNT=$8
 # Get current slot to calculate validity period
 SLOT=$($CARDANO_CLI query   tip \
     $CARDANO_MAGIC  \
-    |   sed -n  '6p'    \
-    |   cut -d  ':' -f2 \
-    |   tr  ',' ' ' \
-    |   xargs)
+    |   jq  '.slot')
 INVALID_HEREAFTER=$(expr $SLOT + 60 \* $MINUTES)
 echo "Current  slot  is  $SLOT"
 echo "Mintable till slot $INVALID_HEREAFTER"
