@@ -706,6 +706,520 @@
                             </form>
                         </div>
                     </div>
+                    <div class="badCafe" style="text-align:left; width:1000px;">
+                        <hr/>
+                        <a  id      = "blockfrostTitle"
+                            onclick = "togglePanel('blockfrost')"
+                            style   = "cursor:pointer; width:100%;">▸ <u>blockfrost</u></a>
+                        <hr/>
+                        <div id="blockfrostPanel" style="display:none">
+                            <form action="/blockfrostCall" method="GET">
+                                <input
+                                        type        = "text"
+                                        placeholder = "docs.blockfrost.io"
+                                        id          = "endpoint"
+                                        name        = "endpoint"
+                                        title       = "Alphanumeric, underscore and slash only."
+                                        pattern     = "[0-9A-Za-z_/]+"
+                                        style       = "width:93.8%"
+                                        required
+                                    />
+                                <input
+                                    type  = "submit"
+                                    value = "Submit"
+                                />
+                                <br/>
+                                <a  id      = "healthTitle"
+                                    onclick = "togglePanel('health')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>health</u></a>
+                                <div id="healthPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/'"
+                                        value   = "Root endpoint"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/health'"
+                                        value   = "Backend health status"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/health/clock'"
+                                        value   = "Current backend time"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "metricsTitle"
+                                    onclick = "togglePanel('metrics')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>metrics</u></a>
+                                <div id="metricsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/metrics'"
+                                        value   = "Blockfrost usage metrics"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/metrics/endpoints'"
+                                        value   = "Blockfrost endpoint usage metrics"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoaccountsTitle"
+                                    onclick = "togglePanel('cardano accounts')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano accounts</u></a>
+                                <div id="cardanoaccountsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}'"
+                                        value   = "Specific account address"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/rewards'"
+                                        value   = "Account reward history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/history'"
+                                        value   = "Account history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/delegations'"
+                                        value   = "Account delegation history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/registrations'"
+                                        value   = "Account registration history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/withdrawals'"
+                                        value   = "Account withdrawal history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/mirs'"
+                                        value   = "Account MIR history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/addresses'"
+                                        value   = "Account associated addresses"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/addresses/assets'"
+                                        value   = "Assets associated with the account addresses"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/accounts/{stake_address}/addresses/total'"
+                                        value   = "Detailed information about account associated addresses"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoaddressesTitle"
+                                    onclick = "togglePanel('cardano addresses')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano addresses</u></a>
+                                <div id="cardanoaddressesPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/addresses/{address}'"
+                                        value   = "Specific address"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/addresses/{address}/extended'"
+                                        value   = "Extended information of a specific address"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/addresses/{address}/total'"
+                                        value   = "Address details"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/addresses/{address}/utxos'"
+                                        value   = "Address UTXOs"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/addresses/{address}/utxos/{asset}'"
+                                        value   = "Address UTXOs of a given asset"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/addresses/{address}/transactions'"
+                                        value   = "Address transactions"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoassetsTitle"
+                                    onclick = "togglePanel('cardano assets')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano assets</u></a>
+                                <div id="cardanoassetsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/assets'"
+                                        value   = "Assets"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/assets/{asset}'"
+                                        value   = "Specific asset"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/assets/{asset}/history'"
+                                        value   = "Asset history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/assets/{asset}/transactions'"
+                                        value   = "Asset transactions"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/assets/{asset}/addresses'"
+                                        value   = "Asset addresses"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/assets/policy/{policy_id}'"
+                                        value   = "Assets of a specific policy"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoblocksTitle"
+                                    onclick = "togglePanel('cardano blocks')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano blocks</u></a>
+                                <div id="cardanoblocksPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/latest'"
+                                        value   = "Latest block"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/latest/txs'"
+                                        value   = "Latest block transactions"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/{hash_or_number}'"
+                                        value   = "Specific block"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/{hash_or_number}/next'"
+                                        value   = "Listing of next blocks"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/{hash_or_number}/previous'"
+                                        value   = "Listing of previous blocks"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/slot/{slot_number}'"
+                                        value   = "Specific block in a slot"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/epoch/{epoch_number}/slot/{slot_number}'"
+                                        value   = "Specific block in a slot in an epoch"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/{hash_or_number}/txs'"
+                                        value   = "Block transactions"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/blocks/{hash_or_number}/addresses'"
+                                        value   = "Addresses affected in a specific block"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoepochsTitle"
+                                    onclick = "togglePanel('cardano epochs')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano epochs</u></a>
+                                <div id="cardanoepochsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/latest'"
+                                        value   = "Latest epoch"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/latest/parameters'"
+                                        value   = "Latest epoch protocol parameters"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}'"
+                                        value   = "Specific epoch"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/next'"
+                                        value   = "Listing of next epochs"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/previous'"
+                                        value   = "Listing of previous epochs"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/stakes'"
+                                        value   = "Stake distribution"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/stakes/{pool_id}'"
+                                        value   = "Stake distribution by pool"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/blocks'"
+                                        value   = "Block distribution"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/blocks/{pool_id}'"
+                                        value   = "Block distribution by pool"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/epochs/{number}/parameters'"
+                                        value   = "Protocol parameters"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoledgerTitle"
+                                    onclick = "togglePanel('cardano ledger')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano ledger</u></a>
+                                <div id="cardanoledgerPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/genesis'"
+                                        value   = "Blockchain genesis"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanometadataTitle"
+                                    onclick = "togglePanel('cardano metadata')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano metadata</u></a>
+                                <div id="cardanometadataPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/metadata/txs/labels'"
+                                        value   = "Transaction metadata labels"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/metadata/txs/labels/{label}'"
+                                        value   = "Transaction metadata content in JSON"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/metadata/txs/labels/{label}/cbor'"
+                                        value   = "Transaction metadata content in CBOR"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanonetworkTitle"
+                                    onclick = "togglePanel('cardano network')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano network</u></a>
+                                <div id="cardanonetworkPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/network'"
+                                        value   = "Network information"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanopoolsTitle"
+                                    onclick = "togglePanel('cardano pools')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano pools</u></a>
+                                <div id="cardanopoolsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools'"
+                                        value   = "List of stake pools"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/extended'"
+                                        value   = "List of stake pools with additional information"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/retired'"
+                                        value   = "List of retired stake pools"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/retiring'"
+                                        value   = "List of retiring stake pools"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}'"
+                                        value   = "Specific stake pool"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}/history'"
+                                        value   = "Stake pool history"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}/metadata'"
+                                        value   = "Stake pool metadata"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}/relays'"
+                                        value   = "Stake pool relays"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}/delegators'"
+                                        value   = "Stake pool delegators"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}/blocks'"
+                                        value   = "Stake pool blocks"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/pools/{pool_id}/updates'"
+                                        value   = "Stake pool updates"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoscriptsTitle"
+                                    onclick = "togglePanel('cardano scripts')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano scripts</u></a>
+                                <div id="cardanoscriptsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts'"
+                                        value   = "Scripts"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts/{script_hash}'"
+                                        value   = "Specific script"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts/{script_hash}/json'"
+                                        value   = "Script JSON"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts/{script_hash}/cbor'"
+                                        value   = "Script CBOR"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts/{script_hash}/redeemers'"
+                                        value   = "Redeemers of a specific script"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts/datum/{datum_hash}'"
+                                        value   = "Datum value"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/scripts/datum/{datum_hash}/cbor'"
+                                        value   = "Datum CBOR value"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanotransactionsTitle"
+                                    onclick = "togglePanel('cardano transactions')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano transactions</u></a>
+                                <div id="cardanotransactionsPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}'"
+                                        value   = "Specific transaction"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/utxos'"
+                                        value   = "Transaction UTXOs"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/stakes'"
+                                        value   = "Transaction stake addresses certificates"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/delegations'"
+                                        value   = "Transaction delegation certificates"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/withdrawals'"
+                                        value   = "Transaction withdrawal"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/mirs'"
+                                        value   = "Transaction MIRs"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/pool_updates'"
+                                        value   = "Transaction stake pool registration and update certificates"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/pool_retires'"
+                                        value   = "Transaction stake pool retirement certificates"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/metadata'"
+                                        value   = "Transaction metadata"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/metadata/cbor'"
+                                        value   = "Transaction metadata in CBOR"
+                                    />
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/txs/{hash}/redeemers'"
+                                        value   = "Transaction redeemers"
+                                    />
+                                </div>
+                                <br/>
+                                <a  id      = "cardanoutilitiesTitle"
+                                    onclick = "togglePanel('cardano utilities')"
+                                    style   = "cursor:pointer; width:100%;">▸ <u>cardano utilities</u></a>
+                                <div id="cardanoutilitiesPanel" style="display:none">
+                                    <input
+                                        type    = "button"
+                                        onclick = "document.getElementById('endpoint').value='/utils/addresses/xpub/{xpub}/{role}/{index}'"
+                                        value   = "Derive an address"
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </table>

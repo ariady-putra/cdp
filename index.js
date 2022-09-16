@@ -517,3 +517,30 @@ app.get('/nftBurn', function(req, rsp)
         });
 });
 
+app.get('/blockfrostCall', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/curlBlockfrost.sh '
+        + req.query.endpoint,
+        (error, stdout, stderr) =>
+        {
+            console.log(stderr);
+            console.log(stdout);
+            if(error == null)
+            {
+                rsp.send(head
+                    + req.query.endpoint
+                    + body
+                    + stderr.toString()
+                    + stdout.toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('blockfrostCall error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+

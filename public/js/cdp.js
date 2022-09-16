@@ -10,6 +10,20 @@ function loadBody()
     setPanelDisplayFor("NFT mint");
     setPanelDisplayFor("NFT send");
     setPanelDisplayFor("NFT burn");
+    setPanelDisplayFor("blockfrost");
+    setPanelDisplayFor("health");
+    setPanelDisplayFor("metrics");
+    setPanelDisplayFor("cardano accounts");
+    setPanelDisplayFor("cardano addresses");
+    setPanelDisplayFor("cardano assets");
+    setPanelDisplayFor("cardano blocks");
+    setPanelDisplayFor("cardano epochs");
+    setPanelDisplayFor("cardano ledger");
+    setPanelDisplayFor("cardano metadata");
+    setPanelDisplayFor("cardano network");
+    setPanelDisplayFor("cardano pools");
+    setPanelDisplayFor("cardano scripts");
+    setPanelDisplayFor("cardano transactions");
     setMetadataJson();
 }
 
