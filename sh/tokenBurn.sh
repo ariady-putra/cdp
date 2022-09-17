@@ -37,16 +37,16 @@ TOKEN_AMOUNT=-$3
 POLICY_ID=""
 while read UTXO
 do
-    TX_HASH=$(echo  $UTXO | cut -d ' ' -f1)
-    TX_IX=$(echo    $UTXO | cut -d ' ' -f2)
+    TX_HASH=$(echo  $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 1p)
+    TX_IX=$(echo    $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 2p)
     
-    IS_TOKEN=$(echo $UTXO | cut -d ' ' -f7)
+    IS_TOKEN=$(echo $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 7p)
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
-    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$TOKEN_NAME" = "$(echo $IS_TOKEN | cut -d '.' -f2)" ]; then
-        POLICY_ID=$(echo $IS_TOKEN | cut -d '.' -f1)
-        AMOUNT=$(echo $UTXO | cut -d ' ' -f6)
+    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$TOKEN_NAME" = "$IS_TOKEN" ]; then
+        POLICY_ID=$(echo  $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 6p)
+        AMOUNT=$(echo     $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 5p)
         TOKEN_AMOUNT=$(expr $TOKEN_AMOUNT + $AMOUNT)
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi

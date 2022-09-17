@@ -40,16 +40,16 @@ TOKEN_AMOUNT=-$3
 POLICY_ID=""
 while read UTXO
 do
-    TX_HASH=$(echo  $UTXO | cut -d ' ' -f1)
-    TX_IX=$(echo    $UTXO | cut -d ' ' -f2)
+    TX_HASH=$(echo  $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 1p)
+    TX_IX=$(echo    $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 2p)
     
-    IS_TOKEN=$(echo $UTXO | cut -d ' ' -f7)
+    IS_TOKEN=$(echo $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 7p)
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
-    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$TOKEN_NAME" = "$(echo $IS_TOKEN | cut -d '.' -f2)" ]; then
-        POLICY_ID=$(echo $IS_TOKEN | cut -d '.' -f1)
-        AMOUNT=$(echo $UTXO | cut -d ' ' -f6)
+    if [ $TOKEN_AMOUNT -lt 0 ] && [ "$TOKEN_NAME" = "$IS_TOKEN" ]; then
+        POLICY_ID=$(echo  $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 6p)
+        AMOUNT=$(echo     $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 5p)
         TOKEN_AMOUNT=$(expr $TOKEN_AMOUNT + $AMOUNT)
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
@@ -66,7 +66,7 @@ echo "Burnable till slot $INVALID_HEREAFTER"
 
 # Build transaction raw file
 if [ $TOKEN_AMOUNT -gt 0 ]; then
-    rm -f tokens/$1/$1.raw
+    rm -f nft/$1/$POLICY_NAME.$TOKEN_NAME.raw
     MIN_REQ_UTXO=$($CARDANO_CLI transaction build   $TX_IN  \
         --tx-out    $WALLET_ADDR+0+"$TOKEN_AMOUNT   $POLICY_ID.$TOKEN_NAME" \
         --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
@@ -85,7 +85,7 @@ if [ $TOKEN_AMOUNT -gt 0 ]; then
         --change-address    $WALLET_ADDR    \
         --out-file  nft/$1/$POLICY_NAME.$TOKEN_NAME.raw \
         $CARDANO_MAGIC  $CARDANO_ERA    2>&1)
-    rm -f tokens/$1/$1.raw
+    rm -f nft/$1/$POLICY_NAME.$TOKEN_NAME.raw
     if [ ${FEE##* } -gt ${MIN_REQ_UTXO##* } ]; then
         $CARDANO_CLI    transaction build   $TX_IN  \
             --tx-out    $WALLET_ADDR+${FEE##* }+"$TOKEN_AMOUNT  $POLICY_ID.$TOKEN_NAME" \
@@ -108,7 +108,7 @@ if [ $TOKEN_AMOUNT -gt 0 ]; then
             $CARDANO_MAGIC  $CARDANO_ERA
     fi
 else
-    rm -f tokens/$1/$1.raw
+    rm -f nft/$1/$POLICY_NAME.$TOKEN_NAME.raw
     $CARDANO_CLI    transaction build   $TX_IN  \
         --mint  "-$3 $POLICY_ID.$TOKEN_NAME"    \
         --minting-script-file   nft/$1/$POLICY_NAME.script  \

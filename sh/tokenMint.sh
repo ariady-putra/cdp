@@ -25,10 +25,10 @@ $CARDANO_CLI    query   utxo    \
 TX_IN=""
 while read UTXO
 do
-    TX_HASH=$(echo  $UTXO | cut -d ' ' -f1)
-    TX_IX=$(echo    $UTXO | cut -d ' ' -f2)
+    TX_HASH=$(echo  $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 1p)
+    TX_IX=$(echo    $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 2p)
     
-    IS_TOKEN=$(echo $UTXO | cut -d ' ' -f8)
+    IS_TOKEN=$(echo $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 7p)
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi

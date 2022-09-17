@@ -7,6 +7,10 @@ CARDANO_MAGIC="--mainnet"
 if test -f ~/cardano/cfg/magic.cardano; then
     CARDANO_MAGIC=$(cat ~/cardano/cfg/magic.cardano)
 fi
+CARDANO_ERA=""
+if test -f ~/cardano/cfg/era.cardano; then
+    CARDANO_ERA=$(cat ~/cardano/cfg/era.cardano)
+fi
 
 # Get wallet address from wallet name
 WALLET_ADDR=$(cat wallets/$1/$1.addr)
@@ -21,11 +25,11 @@ $CARDANO_CLI    query   utxo    \
 TX_IN=""
 while read UTXO
 do
-    TX_HASH=$(echo      $UTXO | cut -d ' ' -f1)
-    TX_IX=$(echo        $UTXO | cut -d ' ' -f2)
-    TX_AMOUNT=$(echo    $UTXO | cut -d ' ' -f3)
+    TX_HASH=$(echo      $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 1p)
+    TX_IX=$(echo        $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 2p)
+    TX_AMOUNT=$(echo    $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 3p)
     
-    IS_TOKEN=$(echo     $UTXO | cut -d ' ' -f8)
+    IS_TOKEN=$(echo     $UTXO | egrep -o '[0-9A-Za-z]+' | sed -n 7p)
     if ! [ $IS_TOKEN ]; then
         TX_IN="$TX_IN --tx-in $TX_HASH#$TX_IX"
     fi
