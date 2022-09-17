@@ -24,6 +24,7 @@ function loadBody()
     setPanelDisplayFor("cardano pools");
     setPanelDisplayFor("cardano scripts");
     setPanelDisplayFor("cardano transactions");
+    setPanelDisplayFor("cardano utilities");
     setMetadataJson();
 }
 
