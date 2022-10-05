@@ -544,3 +544,28 @@ app.get('/blockfrostCall', function(req, rsp)
         });
 });
 
+app.get('/deployScript', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/deployScript.sh '
+        + req.query.plutusScript,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + req.query.plutusScript
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('deployScript error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});

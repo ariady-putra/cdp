@@ -5,11 +5,14 @@ function loadBody()
     setPanelDisplayFor("transfer multiwitness");
     setPanelDisplayFor("transfer atomic-swap");
     setPanelDisplayFor("multisig wallet");
+    
     setPanelDisplayFor("metadata");
+    
     setPanelDisplayFor("native tokens");
     setPanelDisplayFor("NFT mint");
     setPanelDisplayFor("NFT send");
     setPanelDisplayFor("NFT burn");
+    
     setPanelDisplayFor("blockfrost");
     setPanelDisplayFor("health");
     setPanelDisplayFor("metrics");
@@ -25,6 +28,9 @@ function loadBody()
     setPanelDisplayFor("cardano scripts");
     setPanelDisplayFor("cardano transactions");
     setPanelDisplayFor("cardano utilities");
+    
+    setPanelDisplayFor("plutus");
+    
     setMetadataJson();
 }
 

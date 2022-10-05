@@ -1220,6 +1220,29 @@
                             </form>
                         </div>
                     </div>
+                    <div class="badCafe" style="text-align:left; width:1000px;">
+                      <hr/>
+                      <a  id      = "plutusTitle"
+                          onclick = "togglePanel('plutus')"
+                          style   = "cursor:pointer; width:100%;">▸ <u>plutus</u></a>
+                      <hr/>
+                      <div id="plutusPanel" style="display:none">
+                        <form action="/deployScript" method="GET">
+                            <input
+                                type        = "text"
+                                placeholder = "Input Plutus script file"
+                                id          = "plutusScript"
+                                name        = "plutusScript"
+                                style       = "width:90%"
+                                required
+                            />
+                            <input
+                                type  = "submit"
+                                value = "Deploy Script"
+                            />
+                        </form>
+                      </div>
+                  </div>
                 </td>
             </tr>
         </table>
