@@ -8,13 +8,13 @@ if test -f ~/cardano/cfg/magic.cardano; then
     CARDANO_MAGIC=$(cat ~/cardano/cfg/magic.cardano)
 fi
 
-# Create wallet address
+# Create script address
 rm -f $1.addr
 $CARDANO_CLI    address build   \
     --payment-script-file $1  \
     --out-file  $1.addr \
     $CARDANO_MAGIC
 
-# Print the new wallet address
-echo "Your new wallet address is:"
+# Print the script address
+echo "Your script address is:"
 cat $1.addr

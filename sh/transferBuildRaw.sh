@@ -79,11 +79,11 @@ echo "Invalid hereafter: $INVALID_HEREAFTER"
 # Rebuild transaction draft
 rm -f transfers/$1/$1.raw
 $CARDANO_CLI    transaction build-raw   $TX_IN  \
-	--tx-out    $WALLET_ADDR_DST+$3 \
-	--tx-out    $WALLET_ADDR_SRC+$(expr $AMOUNT - $FEE) \
+    --tx-out    $WALLET_ADDR_DST+$3 \
+    --tx-out    $WALLET_ADDR_SRC+$(expr $AMOUNT - $FEE) \
     --invalid-hereafter $INVALID_HEREAFTER  \
-	--fee   $FEE    \
-	--out-file  transfers/$1/$1.raw
+    --fee   $FEE    \
+    --out-file  transfers/$1/$1.raw
 
 # View the transaction
 $CARDANO_CLI    transaction view    \

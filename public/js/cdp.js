@@ -30,6 +30,8 @@ function loadBody()
     setPanelDisplayFor("cardano utilities");
     
     setPanelDisplayFor("plutus");
+    setPanelDisplayFor("datum");
+    setPanelDisplayFor("redeemer");
     
     setMetadataJson();
 }

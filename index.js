@@ -569,3 +569,67 @@ app.get('/deployScript', function(req, rsp)
             }
         });
 });
+
+app.get('/scriptDatum', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/scriptDatum.sh '
+        + req.query.walletNameSrc + ' '
+        + req.query.scriptAddr    + ' '
+        + req.query.lovelaces     + ' '
+        + req.query.datumFile,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Datum Tx from " + req.query.walletNameSrc
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('scriptDatum error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});
+
+app.get('/scriptRedeemer', function(req, rsp)
+{
+    const { exec } = require('child_process');
+    exec('sh sh/scriptRedeemer.sh '
+        + req.query.walletNameRedeemer  + ' '
+        + req.query.txIn                + ' '
+        + req.query.txInCollateral      + ' '
+        + req.query.txInScriptFile      + ' '
+        + req.query.txInDatumFile       + ' '
+        + req.query.txInRedeemerFile    + ' '
+        + req.query.invalidBefore       + ' '
+        + req.query.invalidHereafter    + ' '
+        + req.query.lovelaces           + ' '
+        + req.query.changeAddress,
+        (error, stdout, stderr) =>
+        {
+            console.log(stdout);
+            console.log(stderr);
+            if(error == null)
+            {
+                rsp.send(head
+                    + "Redeemer Tx from " + req.query.walletNameRedeemer
+                    + body
+                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                    + tail);
+            }
+            else
+            {
+                console.log('scriptDatum error:',
+                            error);
+                rsp.send(error.toString());
+            }
+        });
+});

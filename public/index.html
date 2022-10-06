@@ -1241,6 +1241,154 @@
                                 value = "Deploy Script"
                             />
                         </form>
+                        <hr/>
+                        <form action="/scriptDatum" method="GET">
+                            <a  id      = "datumTitle"
+                                onclick = "togglePanel('datum')"
+                                style   = "cursor:pointer; width:100%;">▸ <u>datum</u></a>
+                            <hr/>
+                            <div id="datumPanel" style="display:none">
+                                <table style="width:100%"><tr><td>
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter src wallet name"
+                                        id          = "walletNameSrc"
+                                        name        = "walletNameSrc"
+                                        title       = "Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Enter SCRIPT addr"
+                                        style       = "width:52.37%"
+                                        id          = "scriptAddr"
+                                        name        = "scriptAddr"
+                                        title       = "Alphanumeric and underscore only."
+                                        pattern     = "[0-9A-Za-z_]+"
+                                        required
+                                    />
+                                    <input
+                                        type        = "number"
+                                        placeholder = "Lovelaces"
+                                        id          = "lovelaces"
+                                        name        = "lovelaces"
+                                        min         = "1000000"
+                                        required
+                                    />
+                                    <input
+                                        type  = "submit"
+                                        value = "Send Datum"
+                                    /></td></tr><tr><td>
+                                    <input
+                                        type        = "text"
+                                        placeholder = "Datum file"
+                                        id          = "datumFile"
+                                        name        = "datumFile"
+                                        style       = "width:100%"
+                                    />
+                                </td></tr></table>
+                            </div>
+                        </form>
+                        <hr/>
+                        <form action="/scriptRedeemer" method="GET">
+                            <a  id      = "redeemerTitle"
+                                onclick = "togglePanel('redeemer')"
+                                style   = "cursor:pointer; width:100%;">▸ <u>redeemer</u></a>
+                            <hr/>
+                            <div id="redeemerPanel" style="display:none">
+                                <input
+                                    type        = "text"
+                                    placeholder = "Enter REDEEMER wallet name"
+                                    id          = "walletNameRedeemer"
+                                    name        = "walletNameRedeemer"
+                                    style       = "width:100%"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "--change-address"
+                                    id          = "changeAddress"
+                                    name        = "changeAddress"
+                                    style       = "width:100%"
+                                    title       = "Alphanumeric and underscore only."
+                                    pattern     = "[0-9A-Za-z_]+"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "--tx-in"
+                                    id          = "txIn"
+                                    name        = "txIn"
+                                    style       = "width:100%"
+                                    title       = "Alphanumeric and # only."
+                                    pattern     = "[0-9A-Za-z#]+"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "--tx-in-collateral"
+                                    id          = "txInCollateral"
+                                    name        = "txInCollateral"
+                                    style       = "width:100%"
+                                    title       = "Alphanumeric and # only."
+                                    pattern     = "[0-9A-Za-z#]+"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "--tx-in-script-file"
+                                    id          = "txInScriptFile"
+                                    name        = "txInScriptFile"
+                                    style       = "width:100%"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "--tx-in-datum-file"
+                                    id          = "txInDatumFile"
+                                    name        = "txInDatumFile"
+                                    style       = "width:100%"
+                                /><br/>
+                                <input
+                                    type        = "text"
+                                    placeholder = "--tx-in-redeemer-file"
+                                    id          = "txInRedeemerFile"
+                                    name        = "txInRedeemerFile"
+                                    style       = "width:100%"
+                                /><br/>
+                                <input
+                                    type        = "number"
+                                    placeholder = "--invalid-before"
+                                    id          = "invalidBefore"
+                                    name        = "invalidBefore"
+                                    min         = "0"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "number"
+                                    placeholder = "--invalid-hereafter"
+                                    id          = "invalidHereafter"
+                                    name        = "invalidHereafter"
+                                    min         = "0"
+                                    required
+                                /><br/>
+                                <input
+                                    type        = "number"
+                                    placeholder = "Lovelaces"
+                                    id          = "lovelaces"
+                                    name        = "lovelaces"
+                                    min         = "0"
+                                    required
+                                /><br/>
+                                <input
+                                    type  = "submit"
+                                    value = "Send Redeemer"
+                                />
+                            </div>
+                        </form>
                       </div>
                   </div>
                 </td>
