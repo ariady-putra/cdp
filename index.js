@@ -72,17 +72,33 @@ app.get('/createWallet', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + req.query.walletName
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + req.query.walletName
+                        + body
+                        + (stderr.trim().length == 0 ?
+                            stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('createWallet error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });

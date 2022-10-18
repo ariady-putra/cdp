@@ -1,0 +1,84 @@
+.App {
+  background-image: url('Cardano-RGB_Logo-Icon-FFCB52.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 75vh;
+  background-color: #282c34;
+  color: #ffcb52;
+  vertical-align: middle;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: calc(8px + 2vmin);
+  cursor: default;
+  padding-left: 25%;
+  overflow: clip;
+}
+
+.Error {
+  color: #FF7452;
+  white-space: nowrap;
+  max-width: 0;
+}
+
+pre {
+  font-size: calc(4px + 1vmin);
+  cursor: text;
+}
+
+input {
+  width: 100%;
+  font-size: calc(7.5px + 1.5vmin);
+  text-indent: 7.5px;
+  background-color: #f1cc52;
+  outline-width: 0;
+  border-left: 0;
+  margin-top: 2.5px;
+}
+
+table {
+  align-self: baseline;
+}
+
+td {
+  padding: 5px;
+}
+
+button {
+  color: #282c34;
+  background-color: #ffcc52;
+  border-color: #ffcc52;
+  box-shadow: #ffcc527f 0px 2px 5px 0px;
+  text-decoration: none;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-image: none;
+  background-origin: padding-box;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-size: auto;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  font-size: calc(7.5px + 1.5vmin);
+  width: 100%;
+}
+
+button:hover:enabled {
+  box-shadow: #ffcc52ff 0px 2px 5px 0px;
+  text-decoration: underline;
+}
+
+button:active:enabled {
+  box-shadow: #ffcc523f 0px 2px 5px 0px;
+  text-decoration: none;
+}
+
+button:disabled {
+  background-color: #ffcc527f;
+  border-color: #ffcc521f;
+  box-shadow: #ffcc523f 0px 2px 5px 0px;
+  text-decoration: none;
+  cursor: not-allowed;
+}
