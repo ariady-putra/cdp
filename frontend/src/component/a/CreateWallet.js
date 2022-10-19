@@ -11,10 +11,9 @@ function CreateWallet({output}) {
   return (
     <table><tbody><tr>
       
-      <td><input type='text'
+      <td><input type='text' id='walletName' name='walletName'
         placeholder='Enter wallet name'
-        value={walletName}
-        onChange={wallet => {
+        value={walletName} onChange={wallet => {
           setWalletName(wallet.target.value);
           validateInput(wallet.target.value,
             /^[0-9A-Za-z_]+$/i, 'Alphanumeric and underscore only.',
@@ -22,7 +21,7 @@ function CreateWallet({output}) {
         }}
       /></td>
       
-      <td><button disabled={walletName.length === 0 || error}
+      <td><button disabled={!walletName.length || error}
         onClick={() => apiCall('Create Wallet',
           `/createWallet?walletName=${walletName}`,
           output)}>Create Wallet

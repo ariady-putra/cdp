@@ -11,10 +11,9 @@ function CheckBalance({output}) {
   return (
     <table><tbody><tr>
       
-      <td><input type='text'
+      <td><input type='text' id='wallet' name='wallet'
         placeholder='Enter wallet name or address'
-        value={walletName}
-        onChange={wallet => {
+        value={walletName} onChange={wallet => {
           setWalletName(wallet.target.value);
           validateInput(wallet.target.value,
             /^[0-9A-Za-z_]+$/i, 'Alphanumeric and underscore only.',
@@ -22,7 +21,7 @@ function CheckBalance({output}) {
         }}
       /></td>
       
-      <td><button disabled={walletName.length === 0 || error}
+      <td><button disabled={!walletName.length || error}
         onClick={() => apiCall('Check Balance',
           `/checkBalance?wallet=${walletName}`,
           output)}>Check Balance
