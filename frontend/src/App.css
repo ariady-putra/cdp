@@ -16,10 +16,18 @@
   overflow: clip;
 }
 
+.ResultOutput {
+  color: #dcff52;
+}
+
 .Error {
-  color: #FF7452;
+  color: #ff7452;
   white-space: nowrap;
   max-width: 0;
+}
+
+.Exception {
+  color: #ff7452;
 }
 
 pre {
@@ -62,7 +70,7 @@ button {
   border-width: 1px;
   cursor: pointer;
   font-size: calc(7.5px + 1.5vmin);
-  width: 100%;
+  width: 200px;
 }
 
 button:hover:enabled {

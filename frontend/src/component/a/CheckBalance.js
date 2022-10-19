@@ -4,7 +4,7 @@ import {
   validateInput,
 } from '../../Util';
 
-function CreateWallet({output}) {
+function CheckBalance({output}) {
   const [walletName, setWalletName] = React.useState(() => '');
   const [error, setError] = React.useState(() => '');
   
@@ -12,7 +12,7 @@ function CreateWallet({output}) {
     <table><tbody><tr>
       
       <td><input type='text'
-        placeholder='Enter wallet name'
+        placeholder='Enter wallet name or address'
         value={walletName}
         onChange={wallet => {
           setWalletName(wallet.target.value);
@@ -23,9 +23,9 @@ function CreateWallet({output}) {
       /></td>
       
       <td><button disabled={walletName.length === 0 || error}
-        onClick={() => apiCall('Create Wallet',
-          `/createWallet?walletName=${walletName}`,
-          output)}>Create Wallet
+        onClick={() => apiCall('Check Balance',
+          `/checkBalance?wallet=${walletName}`,
+          output)}>Check Balance
       </button></td>
       
       <td><div className='Error'>
@@ -36,4 +36,4 @@ function CreateWallet({output}) {
   );
 }
 
-export default CreateWallet;
+export default CheckBalance;

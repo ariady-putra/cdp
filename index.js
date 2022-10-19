@@ -93,7 +93,7 @@ app.get('/createWallet', function(req, rsp)
                             error);
                 if(req.query.json)
                 {
-                    rsp.json({exception:error});
+                    rsp.json({exception:error.stack});
                 }
                 else
                 {
@@ -114,17 +114,32 @@ app.get('/checkBalance', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + req.query.wallet
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + req.query.wallet
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('checkBalance error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });
