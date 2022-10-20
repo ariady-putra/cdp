@@ -7,7 +7,7 @@ function CreateWallet({output}) {
   return (
     <form onSubmit={tx => {
       tx.preventDefault();
-      apiCall('Create Wallet', `/createWallet?walletName=${walletName}`,
+      apiCall('Create Wallet', `/createWallet?walletName=${walletName.current.value}`,
         output);
     }}>
       
