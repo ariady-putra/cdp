@@ -1,45 +1,29 @@
 import React from 'react';
-import {
-  apiCall,
-  validateInput,
-} from '../../Util';
+import { apiCall } from '../../Util';
 
 function CheckBalance({output}) {
-  const [walletName, setWalletName] = React.useState(() => '');
-  const [error, setError] = React.useState(() => '');
-  
-  function submit() {
-    apiCall('Check Balance',
-      `/checkBalance?wallet=${walletName}`,
-      output);
-  }
+  const walletName = React.useRef();
   
   return (
-    <table><tbody><tr>
+    <form onSubmit={tx => {
+      tx.preventDefault();
+      apiCall('Check Balance', `/checkBalance?wallet=${walletName}`,
+        output);
+    }}>
       
-      <td><input type='text' id='wallet' name='wallet'
+      <input type='text' id='wallet' name='wallet'
         placeholder='Enter wallet name or address'
-        value={walletName} onChange={wallet => {
-          setWalletName(wallet.target.value);
-          validateInput(wallet.target.value,
-            /^[0-9A-Za-z_]+$/i, 'Alphanumeric and underscore only.',
-            setError);
-        }}
-        onKeyUp={key => {
-          if(key.code === 'Enter')
-            submit();
-        }}
-      /></td>
+        title='Alphanumeric and underscore only.'
+        pattern='[0-9A-Za-z_]+'
+        ref={walletName}
+        required
+      />
       
-      <td><button disabled={!walletName.length || error}
-        onClick={submit}>Check Balance
-      </button></td>
+      <button type='submit'>
+        Check Balance
+      </button>
       
-      <td><div className='Error'>
-        {error}
-      </div></td>
-      
-    </tr></tbody></table>
+    </form>
   );
 }
 

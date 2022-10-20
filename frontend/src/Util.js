@@ -12,3 +12,21 @@ export async function apiCall(name, url, callback) {
     console.log(toJSON);
   }
 }
+
+export function toggleForm(name, form, sub) {
+  switch(form.current.style.display)
+  {
+    case 'none':
+      form.current.style.display = 'block';
+      sub.target.innerText = `▾ ${name}`;
+      break;
+      
+    case 'block':
+      form.current.style.display = 'none';
+      sub.target.innerText = `▸ ${name}`;
+      break;
+      
+    default:
+      break;
+  }
+}

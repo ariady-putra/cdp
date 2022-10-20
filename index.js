@@ -157,19 +157,34 @@ app.get('/transfer', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + "Transfer " + req.query.lovelaces + " Lovelaces "
-                    + "from " + req.query.walletNameSrc
-                    + " to " + req.query.walletNameDst
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                  rsp.json(stderr.trim().length == 0 ?
+                      {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + "Transfer " + req.query.lovelaces + " Lovelaces "
+                        + "from " + req.query.walletNameSrc
+                        + " to " + req.query.walletNameDst
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('submitTransfer error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });
@@ -188,19 +203,34 @@ app.get('/transferBuildRaw', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + "Transfer " + req.query.lovelaces + " Lovelaces "
-                    + "from " + req.query.walletNameSrc
-                    + " to " + req.query.walletNameDst
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                  rsp.json(stderr.trim().length == 0 ?
+                      {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + "Transfer " + req.query.lovelaces + " Lovelaces "
+                        + "from " + req.query.walletNameSrc
+                        + " to " + req.query.walletNameDst
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('submitTransferBuildRaw error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });
@@ -220,18 +250,33 @@ app.get('/transferMultiwitness', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + "Transfer " + req.query.lovelaces + " Lovelaces "
-                    + " to " + req.query.walletNameDst
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                  rsp.json(stderr.trim().length == 0 ?
+                      {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + "Transfer " + req.query.lovelaces + " Lovelaces "
+                        + " to " + req.query.walletNameDst
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('submitTransferMultiwitness error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });
@@ -250,18 +295,33 @@ app.get('/transferAtomicSwap', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + "Swapping " + req.query.walletName1
-                    +   " and "   + req.query.walletName2
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                  rsp.json(stderr.trim().length == 0 ?
+                      {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + "Swapping " + req.query.walletName1
+                        +   " and "   + req.query.walletName2
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('submitTransferAtomicSwap error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });

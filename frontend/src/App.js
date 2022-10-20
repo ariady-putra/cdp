@@ -2,14 +2,29 @@ import './App.css';
 import React from 'react';
 import CreateWallet from './component/a/CreateWallet';
 import CheckBalance from './component/a/CheckBalance';
+import Transfer from './component/a/Transfer';
+import TransferBuildRaw from './component/a/TransferBuildRaw';
+import TransferMultiWitness from './component/a/TransferMultiwitness';
+import TransferAtomicSwap from './component/a/TransferAtomicSwap';
 
 function App() {
   const [result, setResult] = React.useState();
   
   return (
     <div className='App'>
-      <h1>Cardano Tools:</h1>
-      {result ? <div>
+      <h1>Cardano Tools</h1>
+      
+      <div style={{display: result ?
+        'none' : 'block'}}>
+        <CreateWallet output={setResult}/>
+        <CheckBalance output={setResult}/>
+        <Transfer output={setResult}/>
+        <TransferBuildRaw output={setResult}/>
+        <TransferMultiWitness output={setResult}/>
+        <TransferAtomicSwap output={setResult}/>
+      </div>
+      
+      {result && <div>
         <u>{result.title}</u>
         {result.output && <pre className='ResultOutput'>
           {result.output}
@@ -23,11 +38,6 @@ function App() {
         <button onClick={() => setResult()}
           style={{width:'min-content'}}>Back
         </button>
-      </div>
-      :
-      <div>
-        <CreateWallet output={setResult}/>
-        <CheckBalance output={setResult}/>
       </div>}
     </div>
   );
