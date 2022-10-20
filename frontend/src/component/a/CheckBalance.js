@@ -8,6 +8,12 @@ function CheckBalance({output}) {
   const [walletName, setWalletName] = React.useState(() => '');
   const [error, setError] = React.useState(() => '');
   
+  function submit() {
+    apiCall('Check Balance',
+      `/checkBalance?wallet=${walletName}`,
+      output);
+  }
+  
   return (
     <table><tbody><tr>
       
@@ -19,12 +25,14 @@ function CheckBalance({output}) {
             /^[0-9A-Za-z_]+$/i, 'Alphanumeric and underscore only.',
             setError);
         }}
+        onKeyUp={key => {
+          if(key.code === 'Enter')
+            submit();
+        }}
       /></td>
       
       <td><button disabled={!walletName.length || error}
-        onClick={() => apiCall('Check Balance',
-          `/checkBalance?wallet=${walletName}`,
-          output)}>Check Balance
+        onClick={submit}>Check Balance
       </button></td>
       
       <td><div className='Error'>
