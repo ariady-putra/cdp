@@ -7,7 +7,7 @@ function CheckBalance({output}) {
   return (
     <form onSubmit={tx => {
       tx.preventDefault();
-      apiCall('Check Balance', `/checkBalance?wallet=${walletName}`,
+      apiCall('Check Balance', `/checkBalance?wallet=${walletName.current.value}`,
         output);
     }}>
       
