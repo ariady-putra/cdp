@@ -23,7 +23,7 @@ function TransferMultiWitness({output}) {
           `&walletNameSrc1=${walletNameSrc1.current.value}`+
           `&walletNameSrc2=${walletNameSrc2.current.value}`+
           `&walletNameDst=${walletNameDst.current.value}`+
-          `&minutes=${lovelaces.current.value}`,
+          `&walletNameChg=${walletNameChg.current.value}`,
           output);
       }}>
         
