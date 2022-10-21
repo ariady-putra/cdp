@@ -11,6 +11,9 @@ export async function apiCall(name, url, callback) {
   catch {
     console.log(toJSON);
   }
+  finally {
+    window.scrollTo(0,0);
+  }
 }
 
 export function toggleForm(name, form, sub) {

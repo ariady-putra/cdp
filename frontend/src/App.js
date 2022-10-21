@@ -6,6 +6,7 @@ import Transfer from './component/a/Transfer';
 import TransferBuildRaw from './component/a/TransferBuildRaw';
 import TransferMultiWitness from './component/a/TransferMultiwitness';
 import TransferAtomicSwap from './component/a/TransferAtomicSwap';
+import Multisig from './component/b/Multisig';
 
 function App() {
   const [result, setResult] = React.useState();
@@ -16,12 +17,17 @@ function App() {
       
       <div style={{display: result ?
         'none' : 'block'}}>
-        <CreateWallet output={setResult}/>
-        <CheckBalance output={setResult}/>
-        <Transfer output={setResult}/>
-        <TransferBuildRaw output={setResult}/>
-        <TransferMultiWitness output={setResult}/>
-        <TransferAtomicSwap output={setResult}/>
+        <div className='Group'>
+          <CreateWallet output={setResult}/>
+          <CheckBalance output={setResult}/>
+          <Transfer output={setResult}/>
+          <TransferBuildRaw output={setResult}/>
+          <TransferMultiWitness output={setResult}/>
+          <TransferAtomicSwap output={setResult}/>
+        </div>
+        <div className='Group'>
+          <Multisig output={setResult}/>
+        </div>
       </div>
       
       {result && <div>
@@ -35,9 +41,10 @@ function App() {
         {result.exception && <pre className='Exception'>
           {result.exception}
         </pre>}
-        <button onClick={() => setResult()}
+        <center><button onClick={() => setResult()}
           style={{width:'min-content'}}>Back
-        </button>
+        </button></center>
+        <br/>
       </div>}
     </div>
   );

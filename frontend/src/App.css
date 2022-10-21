@@ -16,6 +16,16 @@
   overflow: clip;;
 }
 
+.Group {
+  background-color: #ffcc523f;
+  border-color: #ffcc520f;
+  box-shadow: #ffcc521f 0px 2px 5px 0px;
+  text-decoration: none;
+  padding-left: 4px;
+  padding-bottom: 4px;
+  margin: 4px;
+}
+
 .ResultOutput {
   color: #dcff52;
 }
@@ -36,7 +46,7 @@ pre {
 }
 
 form {
-  width: 615px;
+  width: 715px;
 }
 
 table {
@@ -47,12 +57,12 @@ td {
   padding: 5px;
 }
 
-sub {
+sub, .subTitle {
   font-weight: bold;
   cursor: pointer;
 }
 
-sub:hover {
+sub:hover, .subTitle:hover {
   text-decoration: underline;
 }
 
@@ -88,7 +98,7 @@ button {
   border-width: 1px;
   cursor: pointer;
   font-size: calc(7.5px + 1.5vmin);
-  width: 200px;
+  width: 300px;
 }
 
 button:hover:enabled {

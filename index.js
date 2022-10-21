@@ -159,8 +159,8 @@ app.get('/transfer', function(req, rsp)
             {
                 if(req.query.json)
                 {
-                  rsp.json(stderr.trim().length == 0 ?
-                      {output:stdout} : {error:stderr});
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
                 }
                 else
                 {
@@ -205,8 +205,8 @@ app.get('/transferBuildRaw', function(req, rsp)
             {
                 if(req.query.json)
                 {
-                  rsp.json(stderr.trim().length == 0 ?
-                      {output:stdout} : {error:stderr});
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
                 }
                 else
                 {
@@ -252,8 +252,8 @@ app.get('/transferMultiwitness', function(req, rsp)
             {
                 if(req.query.json)
                 {
-                  rsp.json(stderr.trim().length == 0 ?
-                      {output:stdout} : {error:stderr});
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
                 }
                 else
                 {
@@ -297,8 +297,8 @@ app.get('/transferAtomicSwap', function(req, rsp)
             {
                 if(req.query.json)
                 {
-                  rsp.json(stderr.trim().length == 0 ?
-                      {output:stdout} : {error:stderr});
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
                 }
                 else
                 {
@@ -340,19 +340,34 @@ app.get('/createMultisigWallet', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + req.query.walletName1
-                    + req.query.walletName2
-                    + req.query.walletName3
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + req.query.walletName1
+                        + req.query.walletName2
+                        + req.query.walletName3
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('createMultisigWallet error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });
@@ -374,19 +389,34 @@ app.get('/transferMultisig', function(req, rsp)
             console.log(stderr);
             if(error == null)
             {
-                rsp.send(head
-                    + "Transfer " + req.query.lovelaces + " Lovelaces "
-                    + "from " + req.query.walletNameMultisig
-                    + " to " + req.query.walletNameDst
-                    + body
-                    + (stderr.trim().length == 0 ? stdout : stderr).toString()
-                    + tail);
+                if(req.query.json)
+                {
+                    rsp.json(stderr.trim().length == 0 ?
+                        {output:stdout} : {error:stderr});
+                }
+                else
+                {
+                    rsp.send(head
+                        + "Transfer " + req.query.lovelaces + " Lovelaces "
+                        + "from " + req.query.walletNameMultisig
+                        + " to " + req.query.walletNameDst
+                        + body
+                        + (stderr.trim().length == 0 ? stdout : stderr).toString()
+                        + tail);
+                }
             }
             else
             {
                 console.log('submitMultisigTransfer error:',
                             error);
-                rsp.send(error.toString());
+                if(req.query.json)
+                {
+                    rsp.json({exception:error.stack});
+                }
+                else
+                {
+                    rsp.send(error.toString());
+                }
             }
         });
 });
