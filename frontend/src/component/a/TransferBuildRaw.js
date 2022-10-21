@@ -21,7 +21,7 @@ function TransferBuildRaw({output}) {
         apiCall(name, `/transferBuildRaw?lovelaces=${lovelaces.current.value}`+
           `&walletNameSrc=${walletNameSrc.current.value}`+
           `&walletNameDst=${walletNameDst.current.value}`+
-          `&minutes=${lovelaces.current.value}`,
+          `&minutes=${minutes.current.value}`,
           output);
       }}>
         
